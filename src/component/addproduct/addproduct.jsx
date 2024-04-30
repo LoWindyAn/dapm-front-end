@@ -1,24 +1,52 @@
 import Image from 'next/image'
 import Styles from './addproduct.module.css'
 import { useState } from 'react';
+import cloudinary from 'cloudinary'
+import config from '@/cloudinary.config'
+import axios from 'axios';
 
+cloudinary.config(config)
 
 const AddProduct = ({ display, setDisplay }) => {
     const [imageURL, setImageURL] = useState('');
+    const [image, setImage] = useState('');
+    const [publicId, setPublicId] = useState('')
 
     const handleImageChange = (e) => {
 
         const imageFile = e.target.files[0];
         const reader = new FileReader();
+        setImage(imageFile)
+        reader.onload = async (e) => {
+            const imageURLL = e.target.result;
 
-        reader.onload = (e) => {
-            const imageURL = e.target.result;
-
-            setImageURL(imageURL);
+            await setImageURL(imageURLL);
         };
 
         reader.readAsDataURL(imageFile);
     };
+
+    const upLoadfile = async () => {
+        const formData = new FormData();
+        formData.append('file', image);
+        formData.append('upload_preset', 'frontenddapm');
+        try {
+            const response = await axios.post(
+                'https://api.cloudinary.com/v1_1/' + config.cloud_name + '/image/upload',
+                formData,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                }
+            );
+            await setImageURL(response.data.secure_url);
+            await setPublicId(response.data.public_id)
+            console.log("uploaded")
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     const handleOnClickHuy = () => {
         setDisplay(!display)
@@ -54,7 +82,7 @@ const AddProduct = ({ display, setDisplay }) => {
                 <div className={Styles.part3}>
                     <label htmlFor="">Mô tả</label>
                     {/* <input type="text" /> */}
-                    <textarea name="" id=""></textarea>
+                    <textarea value={imageURL} name="" id=""></textarea>
                 </div>
                 <div className={Styles.part2}>
                     <div className={Styles.part2M}>
@@ -79,7 +107,9 @@ const AddProduct = ({ display, setDisplay }) => {
             </div>
             <div className={Styles.end}>
                 <button onClick={handleOnClickHuy}>Hủy</button>
-                <button>Thêm</button>
+                <button onClick={upLoadfile}>Thêm</button>
+                <button onClick={deleteImage}>Xóa</button>
+
             </div>
         </div>
     )
