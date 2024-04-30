@@ -1,0 +1,179 @@
+.container {
+    padding: 20px;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 32px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.actionbar {
+    display: flex;
+    gap: 40px;
+    margin: 20px 0;
+    align-items: center;
+}
+
+.dropdown {
+    width: 120px;
+    height: 34px;
+    border-radius: 5px;
+    border-color: var(--color3);
+    box-shadow: 0px 0px 10px var(--color3);
+    font-weight: bold;
+    padding: 5px;
+    border-color: var(--color3);
+    cursor: pointer;
+    outline: none;
+}
+
+
+.BoxSearch {
+    display: flex;
+    align-items: center;
+}
+
+.inputSearch {
+    height: 32px;
+    width: 300px;
+    border-radius: 5px 0 0 5px;
+    border: none;
+    padding-left: 20px;
+    box-shadow: 0px 0px 10px var(--color3);
+    outline: none;
+}
+
+.btnSearch {
+    border-radius: 0 5px 5px 0;
+    background-color: var(--color2);
+    color: white;
+    padding: 7px;
+}
+
+.btnSearch:hover {
+    cursor: pointer;
+    color: rgb(252, 159, 159);
+}
+
+.btnAdd,
+.btnDelete {
+    width: 70px;
+    height: 32px;
+    border-radius: 5px;
+    background-color: var(--color2);
+    color: white;
+    padding: 7px;
+    border: none;
+}
+
+.btnAdd:hover {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btnDelete {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    border: 1px solid red;
+    background-color: white;
+    color: red;
+}
+
+.btnDelete:hover {
+    cursor: pointer;
+    background-color: red;
+    color: white;
+}
+
+.table {
+    width: 100%;
+}
+
+.table tr,
+.table td {
+    border: 1px solid var(--color3);
+}
+
+.table thead td {
+    background-color: var(--color2);
+    color: white;
+    text-align: center;
+    height: 32px;
+    padding-top: 10px;
+}
+
+.table tbody td {
+    text-align: center;
+    height: 32px;
+    padding-top: 10px;
+}
+
+.pagination {
+    margin-top: 20px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.pagination button {
+    width: 50px;
+    height: 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    font-weight: bold;
+    font-size: 20px;
+    background-color: white;
+}
+
+.pagination button:hover {
+    background-color: var(--color3);
+}
+
+.pagination ul {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.pagination ul li {
+    cursor: pointer;
+    color: black;
+    width: 30px;
+    height: 20px;
+    padding: 5px;
+    border-radius: 5px;
+    text-align: center;
+
+}
+
+.pagination ul li:hover {
+    background-color: bisque;
+}
+
+.active {
+    background-color: var(--color2);
+    font-weight: bold;
+    color: white !important;
+}
+
+.addproduct {
+    position: fixed;
+    top: 20%;
+    left: 40%;
+}
+
+.blur {
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    opacity: 50%;
+    position: fixed;
+    top: 8%;
+    left: 13.4%;
+}

@@ -1,0 +1,102 @@
+.container {
+    width: 500px;
+    height: fit-content;
+    background-color: white;
+    border: 1px solid var(--color3);
+    border-radius: 10px;
+
+}
+
+.container>p {
+    color: var(--color1);
+    margin: 20px;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.content {
+    border-top: 2px solid var(--color2);
+    border-bottom: 2px solid var(--color3);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.content label {
+    font-weight: 600;
+}
+
+.content input {
+    width: 200px;
+    height: 28px;
+    border-radius: 5px;
+    border: 1px solid grey;
+    outline: none;
+}
+
+.part1 {
+    display: flex;
+    gap: 20px;
+}
+
+.part1 img {
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+.category {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.category p {
+    font-weight: bold;
+}
+
+.category select {
+    width: 200px;
+    height: 30px;
+    border-radius: 5px;
+    padding: 0 10px;
+    border: 1px solid grey;
+}
+
+.part2 {
+    display: flex;
+    gap: 20px;
+}
+
+.part2M,
+.part3 {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.part3 textarea {
+    border-radius: 5px;
+}
+
+.end {
+    display: flex;
+    gap: 20px;
+    justify-content: flex-end;
+    margin: 10px;
+}
+
+.end button {
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    background-color: var(--color2);
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.end button:first-child {
+    background-color: var(--color4);
+}
