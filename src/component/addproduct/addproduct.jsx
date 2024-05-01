@@ -108,7 +108,6 @@ const AddProduct = ({ display, setDisplay }) => {
             <div className={Styles.end}>
                 <button onClick={handleOnClickHuy}>Hủy</button>
                 <button onClick={upLoadfile}>Thêm</button>
-                <button onClick={deleteImage}>Xóa</button>
 
             </div>
         </div>

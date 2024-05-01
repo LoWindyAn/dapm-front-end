@@ -1,10 +1,11 @@
 "use client"
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import Styles from './products.module.css'
-import { FaSearch } from "react-icons/fa";
+import { FaSearch, FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { useState } from 'react';
 import AddProduct from '@/component/addproduct/addproduct';
+
 
 
 const Products = () => {
@@ -41,6 +42,7 @@ const Products = () => {
             <table className={Styles.table}>
                 <thead>
                     <tr>
+                        <td><input type="checkbox" /></td>
                         <td>Mã sản phẩm</td>
                         <td>Tên sản phẩm</td>
                         <td>Danh mục</td>
@@ -54,6 +56,7 @@ const Products = () => {
                 </thead>
                 <tbody>
                     <tr>
+                        <td><input type="checkbox" /></td>
                         <td>1</td>
                         <td>2</td>
                         <td>3</td>
@@ -62,9 +65,10 @@ const Products = () => {
                         <td>6</td>
                         <td>7</td>
                         <td>8</td>
-                        <td>9</td>
+                        <td><FaEdit /></td>
                     </tr>
                     <tr>
+                        <td><input type="checkbox" /></td>
                         <td>1</td>
                         <td>2</td>
                         <td>3</td>
@@ -73,9 +77,11 @@ const Products = () => {
                         <td>6</td>
                         <td>7</td>
                         <td>8</td>
-                        <td>9</td>
+                        <td><FaEdit /></td>
+
                     </tr>
                     <tr>
+                        <td><input type="checkbox" /></td>
                         <td>1</td>
                         <td>2</td>
                         <td>3</td>
@@ -84,9 +90,11 @@ const Products = () => {
                         <td>6</td>
                         <td>7</td>
                         <td>8</td>
-                        <td>9</td>
+                        <td><FaEdit /></td>
+
                     </tr>
                     <tr>
+                        <td><input type="checkbox" /></td>
                         <td>1</td>
                         <td>2</td>
                         <td>3</td>
@@ -95,9 +103,11 @@ const Products = () => {
                         <td>6</td>
                         <td>7</td>
                         <td>8</td>
-                        <td>9</td>
+                        <td><FaEdit /></td>
+
                     </tr>
                     <tr>
+                        <td><input type="checkbox" /></td>
                         <td>1</td>
                         <td>2</td>
                         <td>3</td>
@@ -106,9 +116,11 @@ const Products = () => {
                         <td>6</td>
                         <td>7</td>
                         <td>8</td>
-                        <td>9</td>
+                        <td><FaEdit /></td>
+
                     </tr>
                     <tr>
+                        <td><input type="checkbox" /></td>
                         <td>1</td>
                         <td>2</td>
                         <td>3</td>
@@ -117,9 +129,11 @@ const Products = () => {
                         <td>6</td>
                         <td>7</td>
                         <td>8</td>
-                        <td>9</td>
+                        <td><FaEdit /></td>
+
                     </tr>
                     <tr>
+                        <td><input type="checkbox" /></td>
                         <td>1</td>
                         <td>2</td>
                         <td>3</td>
@@ -128,9 +142,11 @@ const Products = () => {
                         <td>6</td>
                         <td>7</td>
                         <td>8</td>
-                        <td>9</td>
+                        <td><FaEdit /></td>
+
                     </tr>
                     <tr>
+                        <td><input type="checkbox" /></td>
                         <td>1</td>
                         <td>2</td>
                         <td>3</td>
@@ -139,7 +155,8 @@ const Products = () => {
                         <td>6</td>
                         <td>7</td>
                         <td>8</td>
-                        <td>9</td>
+                        <td><FaEdit /></td>
+
                     </tr>
                 </tbody>
             </table>

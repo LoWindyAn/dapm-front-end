@@ -30,7 +30,7 @@ const menu = [
 const SideBar = () => {
 
     const pathname = usePathname().split('/');
-    const endpath = "/" + pathname[pathname.length - 1];
+    const endpath = "/" + pathname[2];
 
     return (
         <div className={Styles.container}>

@@ -1,0 +1,85 @@
+.container {
+    padding: 20px;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 32px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.title span {
+    cursor: pointer;
+    padding-left: 6px;
+}
+
+.title span:hover {
+    background-color: rgb(170, 170, 170);
+    border-radius: 10px;
+}
+
+.content {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 80vh;
+}
+
+.contentLeft {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    gap: 5px;
+}
+
+.contentLeft label {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.contentLeft input {
+    width: 400px;
+    height: 32px;
+    border-radius: 5px;
+    border-color: grey;
+    margin-bottom: 20px;
+    padding-left: 10px;
+    font-weight: 600;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.contentRight {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contentRight button {
+    width: 200px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: var(--color2);
+    border: none;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.contentRight .btnCancel {
+    border: 1px solid red;
+    background-color: white;
+    color: red;
+}
+
+.contentRight .btnCancel:hover {
+    background-color: red;
+    color: white;
+    transition: ease-in-out 200ms;
+}
+
+.contentRight textarea {
+    padding: 20px;
+    border: 1px solid;
+    border-radius: 5px;
+}
