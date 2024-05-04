@@ -10,9 +10,14 @@
 
 .actionbar {
     display: flex;
-    gap: 40px;
     margin: 20px 0;
     align-items: center;
+    justify-content: space-between;
+}
+
+.actionbar .actionbarLeft {
+    display: flex;
+    gap: 40px;
 }
 
 .dropdown {
@@ -56,6 +61,23 @@
     color: rgb(252, 159, 159);
 }
 
+.actionbar button {
+    width: 150px;
+    height: 32px;
+    background-color: var(--color2);
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    right: 0px;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.actionbar button:hover {
+    background-color: var(--color1);
+}
+
 .btnAdd,
 .btnDelete {
     width: 70px;
@@ -65,13 +87,11 @@
     color: white;
     padding: 7px;
     border: none;
-    font-weight: bold;
-
 }
 
 .btnAdd:hover {
     cursor: pointer;
-    background-color: var(--color1);
+    font-weight: bold;
 }
 
 .btnDelete {
@@ -90,28 +110,7 @@
     color: white;
 }
 
-.table {
-    width: 100%;
-}
 
-.table tr,
-.table td {
-    border: 1px solid var(--color3);
-}
-
-.table thead td {
-    background-color: var(--color2);
-    color: white;
-    text-align: center;
-    height: 32px;
-    padding-top: 10px;
-}
-
-.table tbody td {
-    text-align: center;
-    height: 32px;
-    padding-top: 10px;
-}
 
 .pagination {
     margin-top: 20px;
@@ -119,6 +118,8 @@
     gap: 20px;
     align-items: center;
     justify-content: center;
+    position: absolute;
+    bottom: 100px;
 }
 
 .pagination button {
@@ -176,6 +177,6 @@
     background-color: #000000;
     opacity: 50%;
     position: fixed;
-    top: 8%;
-    left: 13.4%;
+    top: 0;
+    left: 0;
 }

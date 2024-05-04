@@ -3,6 +3,9 @@
     height: 64px;
     display: flex;
     align-items: center;
+    position: fixed;
+    width: 100%;
+
 }
 
 .header_left {
@@ -13,7 +16,8 @@
     padding: 0 12px;
     /* padding-left: 12px; */
     align-items: center;
-    flex: 1;
+    /* flex: 1; */
+    width: 200px;
 }
 
 .image {
