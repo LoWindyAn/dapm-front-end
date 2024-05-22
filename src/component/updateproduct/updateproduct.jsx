@@ -1,6 +1,6 @@
 import Image from 'next/image'
-import Styles from './addproduct.module.css'
-import { useEffect, useState } from 'react';
+import Styles from './updateproduct.module.css'
+import { useEffect, useLayoutEffect, useState } from 'react';
 import cloudinary from 'cloudinary'
 import config from '@/cloudinary.config'
 import axios from 'axios';
@@ -10,23 +10,18 @@ import { ToastContainer, toast } from 'react-toastify';
 
 cloudinary.config(config)
 
-const AddProduct = (props) => {
-    const { display, setDisplay, categories, setIsSubmit, manufacture } = props
+const UpdateProduct = (props) => {
+    const { display, setDisplay, categories, setIsSubmit, aproduct, manufacture } = props
     const [imageURL, setImageURL] = useState('');
     const [image, setImage] = useState(null);
     const [publicId, setPublicId] = useState('')
     const [loadSubmit, setLoadSubmit] = useState(false)
-    const [product, setProduct] = useState({
-        "MaSP": "",
-        "TenSP": "",
-        "MoTa": "",
-        "DonGia": 0,
-        "PhiLapDat": 0,
-        "SoLuongCon": 0,
-        "HinhAnh": "",
-        "MaNCC": "NCC00002",
-        "MaLoai": "LLK00001"
-    })
+    const [product, setProduct] = useState({})
+
+    useLayoutEffect(() => {
+        setProduct(aproduct)
+        setImageURL(aproduct.HinhAnh)
+    }, [aproduct])
 
     const handleImageChange = (e) => {
 
@@ -93,7 +88,7 @@ const AddProduct = (props) => {
     }
 
     const handleSubmit = async () => {
-        if (!product.MaSP || !product.TenSP || !product.MoTa || !product.DonGia || !product.PhiLapDat || !product.SoLuongCon || !image) {
+        if (!product.MaSP || !product.TenSP || !product.MoTa || !product.DonGia || !product.PhiLapDat || !product.SoLuongCon || !imageURL) {
             toast.error('Vui lòng nhập đủ thông tin linh kiện!', {
                 position: "top-center",
                 autoClose: 1200,
@@ -107,8 +102,12 @@ const AddProduct = (props) => {
             toast()
         } else {
             setLoadSubmit(true)
-            const HinhAnh = await upLoadfile()
-            const res = await axios.post('http://localhost:3500/products/', {
+            let HinhAnh = imageURL
+            if (image) {
+                HinhAnh = await upLoadfile()
+            }
+            setImage(null)
+            const res = await axios.put('http://localhost:3500/products/', {
                 MaSP: product.MaSP,
                 TenSP: product.TenSP,
                 MoTa: product.MoTa,
@@ -124,9 +123,9 @@ const AddProduct = (props) => {
                 "MaSP": "",
                 "TenSP": "",
                 "MoTa": "",
-                "DonGia": 0,
-                "PhiLapDat": 0,
-                "SoLuongCon": 0,
+                "DonGia": '',
+                "PhiLapDat": '',
+                "SoLuongCon": '',
                 "HinhAnh": "",
                 "MaNCC": "NCC00002",
                 "MaLoai": "LLK00001"
@@ -138,14 +137,13 @@ const AddProduct = (props) => {
 
     return (
         <div className={Styles.container} style={!display ? { display: "none" } : { display: "" }}>
-            <ToastContainer />
-            <p>Thêm linh kiện</p>
+            <p>Sửa linh kiện</p>
             <div className={Styles.content}>
                 <div className={Styles.part1}>
                     <Image className={Styles.img} src={imageURL} width={100} height={80} alt='Chọn hình ảnh linh kiện' />
                     <div className={Styles.category}>
                         <p>Loại linh kiện</p>
-                        <select name="MaLoai" onChange={handleChangeProduct}>
+                        <select name="MaLoai" value={product.MaLoai} onChange={handleChangeProduct}>
                             {
                                 categories && categories.map(cat => (
                                     <option value={cat.MaLoai}>{cat.TenLoai}</option>
@@ -157,7 +155,7 @@ const AddProduct = (props) => {
                 <div className={Styles.part2}>
                     <div className={Styles.part2M}>
                         <label htmlFor="">Mã linh kiện</label>
-                        <input style={{ width: '100px' }} name="MaSP" type="text" value={product.MaSP} onChange={handleChangeProduct} />
+                        <input readOnly={true} style={{ width: '100px', background: '#a8a8a8' }} name="MaSP" type="text" value={product.MaSP} onChange={handleChangeProduct} />
                     </div>
                     <div className={Styles.part2M}>
                         <label htmlFor="">Tên linh kiện</label>
@@ -190,7 +188,7 @@ const AddProduct = (props) => {
                 </div>
                 <div className={Styles.manufacture}>
                     <p>Nhà cung cấp</p>
-                    <select name="MaNCC" onChange={handleChangeProduct}>
+                    <select name="MaNCC" value={product.MaNCC} onChange={handleChangeProduct}>
                         {
                             manufacture && manufacture.map(mac => (
                                 <option value={mac.MaNCC}>{mac.TenNCC}</option>
@@ -201,7 +199,7 @@ const AddProduct = (props) => {
             </div>
             <div className={Styles.end}>
                 <button onClick={handleOnClickHuy}>Hủy</button>
-                <button onClick={handleSubmit}>Thêm</button>
+                <button onClick={handleSubmit}>Cập nhật</button>
             </div>
             {
                 loadSubmit &&
@@ -215,4 +213,4 @@ const AddProduct = (props) => {
     )
 }
 
-export default AddProduct
+export default UpdateProduct

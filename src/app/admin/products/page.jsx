@@ -9,6 +9,7 @@ import axios from 'axios';
 import Image from 'next/image';
 import { ToastContainer, toast } from 'react-toastify';
 import RepairService from '@/component/repairservice/RepairService';
+import UpdateProduct from '@/component/updateproduct/updateproduct';
 
 const Products = () => {
     const searchParams = useSearchParams();
@@ -23,6 +24,10 @@ const Products = () => {
     // const [service, setService] = useState(null)
     const [typeSearch, setTypeSearch] = useState('TenSP')
     const [maloai, setMaloai] = useState('')
+    const [displayUpdate, setDisplayUpdate] = useState(true)
+    const [aproduct, setaProduct] = useState('')
+    const [isUpdate, setIsUpdate] = useState(true)
+    const [manufacture, setManufacture] = useState(null)
 
     const fetchService = async () => {
         const res = await axios.get('http://localhost:3500/service')
@@ -33,8 +38,10 @@ const Products = () => {
         if (!search) { search = '' }
         const res = await axios.get(`http://localhost:3500/products/search?type=${typeSearch}&search=${search}&maloai=${maloai}`)
         const resCate = await axios.get('http://localhost:3500/products/categories')
+        const manufac = await axios.get('http://localhost:3500/manufacture')
         setProducts(chunkArray(res.data, 7))
         setCategories(resCate.data)
+        setManufacture(manufac.data)
     }
 
     useEffect(() => {
@@ -53,6 +60,10 @@ const Products = () => {
     const handleChildDisplayChange = (newDisplay) => {
         setDisplay(newDisplay);
     };
+
+    const handleChildDisplayUpdateChange = (newDisplay) => {
+        setDisplayUpdate(newDisplay)
+    }
 
     const handleChanglePage = (e) => {
         const params = new URLSearchParams(searchParams.toString())
@@ -107,15 +118,30 @@ const Products = () => {
     }
 
     const handleClickDelete = async () => {
-        try {
-            const response = await axios.delete('http://localhost:3500/products/', {
-                data: { productIds: deleteItem }
-            });
-            console.log(response.data);
-        } catch (error) {
-            console.error('Error deleting products:', error.response ? error.response.data : error.message);
+        if (deleteItem.length > 0) {
+            try {
+                const response = await axios.delete('http://localhost:3500/products/', {
+                    data: { productIds: deleteItem }
+                });
+                console.log(response.data);
+            } catch (error) {
+                console.error('Error deleting products:', error.response ? error.response.data : error.message);
+            }
+            fetchProducts()
         }
-        fetchProducts()
+        else {
+            toast.error('Chọn ít nhất 1 sản phẩm để xóa', {
+                position: "top-center",
+                autoClose: 1200,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            });
+            toast()
+        }
     };
 
     const handleDeleteOne = async (item) => {
@@ -145,7 +171,6 @@ const Products = () => {
         });
         toast()
     }
-    console.log(categories);
     const handleSearch = (e) => {
         fetchProducts(e.target.value)
     }
@@ -162,6 +187,16 @@ const Products = () => {
         setMaloai(e.target.value)
     }
 
+    useEffect(() => {
+        setDisplayUpdate(!displayUpdate)
+    }, [aproduct])
+
+
+    const handleUpdate = async (item) => {
+        await setaProduct(item)
+        setIsUpdate(!isUpdate)
+    }
+
     return (
         <div className={Styles.container}>
             <ToastContainer />
@@ -173,7 +208,7 @@ const Products = () => {
                 </select>
                 <div className={Styles.BoxSearch}>
                     <input onChange={handleSearch} type="text" placeholder='Tìm kiếm' className={Styles.inputSearch} />
-                    <FaSearch className={Styles.btnSearch} size={20} onClick={Toastify} />
+                    <FaSearch className={Styles.btnSearch} size={20} />
                 </div>
                 <button className={Styles.btnAdd} onClick={() => setDisplay(!display)}><FaPlus />Thêm linh kiện </button>
                 <button className={Styles.btnDelete} onClick={handleClickDelete}>Xóa sản phẩm <MdDelete size={15} /></button>
@@ -212,12 +247,12 @@ const Products = () => {
                                     <td >{item.TenSP}</td>
                                     <td>{categories.find(cat => cat.MaLoai == item.MaLoai).TenLoai}</td>
                                     {/* <td>{item.MoTa}</td> */}
-                                    <td>{item.SoLuongCon}</td>
-                                    <td>{item.DonGia} </td>
-                                    <td>{item.PhiLapDat}</td>
+                                    <td style={item.SoLuongCon < 11 ? { color: 'red', fontWeight: '600' } : { color: 'black', fontWeight: '600' }}>{item.SoLuongCon}</td>
+                                    <td style={{ color: 'green', fontWeight: '600' }}>{item.DonGia} </td>
+                                    <td style={{ color: 'rgb(147, 152, 0)', fontWeight: '600' }}>{item.PhiLapDat}</td>
                                     <td><Image style={{ marginTop: "4px" }} width={60} height={40} src={item.HinhAnh} alt="aaaa" /></td>
                                     <td className={Styles.actionBtn}>
-                                        <button className={Styles.Edit} onClick={Toastify}>
+                                        <button className={Styles.Edit} onClick={() => handleUpdate(item)}>
                                             <FaEdit />
                                         </button>
                                         <button className={Styles.Delete} onClick={() => handleDeleteOne(item)}>
@@ -248,8 +283,16 @@ const Products = () => {
 
             </div>
 
-            <div className={Styles.addproduct}>
-                <AddProduct display={display} setDisplay={handleChildDisplayChange} categories={categories} setIsSubmit={setIsSubmit} />
+            <div style={!displayUpdate ? { display: "none" } : { display: "" }} onClick={() => handleChildDisplayUpdateChange(!displayUpdate)} className={Styles.blurUpdate}>
+
+            </div>
+
+            <div className={`${Styles.addproduct} ${display ? Styles.show : ''}`}>
+                <AddProduct display={display} setDisplay={handleChildDisplayChange} manufacture={manufacture} categories={categories} setIsSubmit={setIsSubmit} />
+            </div>
+
+            <div className={`${Styles.updateproduct} ${displayUpdate ? Styles.show : ''}`}>
+                <UpdateProduct display={displayUpdate} setDisplay={handleChildDisplayUpdateChange} manufacture={manufacture} aproduct={aproduct} categories={categories} setIsSubmit={setIsSubmit} />
             </div>
 
             {/* <RepairService service={service} /> */}
