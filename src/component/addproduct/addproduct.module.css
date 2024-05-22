@@ -1,6 +1,6 @@
 .container {
     width: 500px;
-    height: fit-content;
+    height: 600px;
     background-color: white;
     border: 1px solid var(--color3);
     border-radius: 10px;
@@ -21,6 +21,8 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    overflow-y: scroll;
+    height: 430px;
 }
 
 .content label {
@@ -77,6 +79,11 @@
 
 .part3 textarea {
     border-radius: 5px;
+    min-height: 100px;
+    /* Thiết lập kích thước tối thiểu ban đầu */
+    height: auto;
+    /* Đặt chiều cao tự động */
+    resize: vertical;
 }
 
 .end {
@@ -99,4 +106,19 @@
 
 .end button:first-child {
     background-color: var(--color4);
+}
+
+.HashLoader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250vh;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.HashLoader>* {
+    opacity: 1;
 }

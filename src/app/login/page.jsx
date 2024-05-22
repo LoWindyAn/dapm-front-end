@@ -11,7 +11,6 @@ const LoginPage = () => {
         username: "",
         password: ""
     });
-
     const [tipe, setTipe] = useState(false)
 
     const handleOnchange = (e) => {
@@ -30,18 +29,17 @@ const LoginPage = () => {
     }
 
     const handleSubmit = () => {
-        toast.success(`Login success for ${infoLogin.username} with password ${infoLogin.password}`)
+        toast.success(`Login success`)
         redirect('./admin')
     }
     return (
         <div className={Styles.container}>
+
             <form action={handleSubmit} className={Styles.form}>
                 <p className={Styles.title}>Staff Login</p>
                 <input type="text" name='username' onChange={(e) => handleOnchange(e)} value={infoLogin.username} className={Styles.input} placeholder="username" />
                 <input type={tipe ? "text" : "password"} name='password' onChange={(e) => handleOnchange(e)} value={infoLogin.password} className={Styles.input} placeholder="password" />
                 {tipe ? <FaEye className={Styles.eye} onClick={ChangeTipe} /> : <FaEyeSlash className={Styles.eye} onClick={ChangeTipe} />}
-
-
                 <button type='submit' className={`${Styles.button}`}>Login</button>
             </form>
         </div>

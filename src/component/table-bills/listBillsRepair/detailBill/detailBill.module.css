@@ -1,0 +1,86 @@
+.container {
+    padding: 20px;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 32px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.title span {
+    cursor: pointer;
+    padding-left: 6px;
+}
+
+.title span:hover {
+    background-color: rgb(170, 170, 170);
+    border-radius: 10px;
+}
+
+.button {
+    margin: 10px 0;
+    display: flex;
+    justify-content: flex-end;
+    gap: 30px;
+}
+
+.button button {
+    width: 150px;
+    height: 32px;
+    background-color: var(--color2);
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button button:hover {
+    background-color: var(--color1);
+}
+
+.infor {
+    display: flex;
+    padding: 20px;
+}
+
+.infor .ulFirst {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.infor .ulSecond {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.infor li {
+    font-weight: bold;
+}
+
+.table {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.table td {
+    border: solid 1px black;
+    height: 25px;
+    text-align: center;
+    padding-top: 10px;
+
+}
+
+.table thead {
+    background-color: var(--color2);
+}
+
+.table thead td {
+    color: white;
+    font-weight: 600;
+}
