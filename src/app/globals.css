@@ -152,3 +152,10 @@ table {
   margin-left: 207px;
   padding-left: 13px;
 }
+
+@media (max-width:1024px) {
+  .mainnn-children2 {
+    margin-left: 0px;
+
+  }
+}

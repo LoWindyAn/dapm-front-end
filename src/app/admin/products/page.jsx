@@ -16,16 +16,25 @@ const Products = () => {
     const router = useRouter()
     const [page, setPage] = useState(1)
     const [display, setDisplay] = useState(false);
-    const [products, setProducts] = useState(null);
+    const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState(null);
     const [isSubmit, setIsSubmit] = useState(false)
     const [deleteItem, setDeleteItem] = useState([])
-    const [service, setService] = useState(null)
-
+    // const [service, setService] = useState(null)
+    const [typeSearch, setTypeSearch] = useState('TenSP')
+    const [maloai, setMaloai] = useState('')
 
     const fetchService = async () => {
         const res = await axios.get('http://localhost:3500/service')
         setService(res.data)
+    }
+
+    const fetchProducts = async (search) => {
+        if (!search) { search = '' }
+        const res = await axios.get(`http://localhost:3500/products/search?type=${typeSearch}&search=${search}&maloai=${maloai}`)
+        const resCate = await axios.get('http://localhost:3500/products/categories')
+        setProducts(chunkArray(res.data, 7))
+        setCategories(resCate.data)
     }
 
     useEffect(() => {
@@ -36,13 +45,6 @@ const Products = () => {
         fetchProducts()
     }, [])
 
-    const fetchProducts = async () => {
-        const res = await axios.get('http://localhost:3500/products')
-        const resCate = await axios.get('http://localhost:3500/products/categories')
-        setProducts(chunkArray(res.data, 5))
-        setCategories(resCate.data)
-
-    }
     useEffect(() => {
         fetchProducts()
         setIsSubmit(false)
@@ -57,6 +59,29 @@ const Products = () => {
         params.set("page", e.target.value);
         router.push(pathname + "?" + params)
         setPage(e.target.value)
+    }
+
+    const handleNextPage = () => {
+        const numPage = Number(products.length)
+        const params = new URLSearchParams(searchParams.toString())
+        if (Number(params.get("page")) < numPage) {
+            const page = Number(params.get("page"))
+            params.set("page", page + 1);
+            router.push(pathname + "?" + params)
+            setPage(page + 1)
+            console.log(page);
+        }
+    }
+
+    const handlePrevPage = () => {
+        const params = new URLSearchParams(searchParams.toString())
+        if (Number(params.get("page")) > 1) {
+            const page = Number(params.get("page"))
+            params.set("page", page - 1);
+            router.push(pathname + "?" + params)
+            setPage(page - 1)
+            console.log(page);
+        }
     }
 
     function chunkArray(arr, chunkSize) {
@@ -75,10 +100,8 @@ const Products = () => {
 
     const handleSelectProduct = (e, MaSP) => {
         if (e.target.checked) {
-            // Thêm sản phẩm vào deleteItem khi checkbox được chọn
             setDeleteItem([...deleteItem, MaSP]);
         } else {
-            // Bỏ sản phẩm khỏi deleteItem khi checkbox bị bỏ chọn
             setDeleteItem(deleteItem.filter(i => i !== MaSP));
         }
     }
@@ -97,6 +120,7 @@ const Products = () => {
 
     const handleDeleteOne = async (item) => {
         const ItemDL = [item.MaSP]
+
         try {
             const response = await axios.delete('http://localhost:3500/products/', {
                 data: { productIds: ItemDL }
@@ -121,31 +145,54 @@ const Products = () => {
         });
         toast()
     }
+    console.log(categories);
+    const handleSearch = (e) => {
+        fetchProducts(e.target.value)
+    }
+
+    const handleChangleType = (e) => {
+        setTypeSearch(e.target.value)
+    }
+
+    useEffect(() => {
+        fetchProducts()
+    }, [maloai])
+
+    const handleChangleMaloai = (e) => {
+        setMaloai(e.target.value)
+    }
 
     return (
         <div className={Styles.container}>
             <ToastContainer />
             <p className={Styles.title}>Danh sách linh kiện</p>
             <div className={Styles.actionbar}>
-                <select className={Styles.dropdown}>
-                    <option value="0">Tên</option>
-                    <option value="1">Danh mục</option>
-                    <option value="2">Mã sản phẩm</option>
+                <select className={Styles.dropdown} onChange={handleChangleType}>
+                    <option value="TenSP">Tên sản phẩm</option>
+                    <option value="MaSP">Mã sản phẩm</option>
                 </select>
                 <div className={Styles.BoxSearch}>
-                    <input type="text" placeholder='Tìm kiếm' className={Styles.inputSearch} />
+                    <input onChange={handleSearch} type="text" placeholder='Tìm kiếm' className={Styles.inputSearch} />
                     <FaSearch className={Styles.btnSearch} size={20} onClick={Toastify} />
                 </div>
                 <button className={Styles.btnAdd} onClick={() => setDisplay(!display)}><FaPlus />Thêm linh kiện </button>
-                <button className={Styles.btnDelete} onClick={handleClickDelete}>Xóa <MdDelete size={15} /></button>
+                <button className={Styles.btnDelete} onClick={handleClickDelete}>Xóa sản phẩm <MdDelete size={15} /></button>
+                <select className={Styles.dropdown} onChange={handleChangleMaloai}>
+                    <option value="">Tất cả</option>
+                    {
+                        categories && categories.map(cat => (
+                            <option value={cat.MaLoai}>{cat.TenLoai}</option>
+                        ))
+                    }
+                </select>
             </div>
             <div className={Styles.aroundTable}>
                 <table className={Styles.table}>
                     <thead>
                         <tr>
-                            <td><input type="checkbox" /></td>
+                            <td style={{ width: "30px" }}><input type="checkbox" /></td>
                             <td>Mã sản phẩm</td>
-                            <td>Tên sản phẩm</td>
+                            <td style={{ width: "300px" }}>Tên sản phẩm</td>
                             <td>Danh mục</td>
                             {/* <td>Mô tả</td> */}
                             <td>Số lượng</td>
@@ -156,13 +203,13 @@ const Products = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {products
+                        {products && products.length > 0
                             ?
                             products[page - 1].map((item, index) => (
                                 <tr key={index} className={Styles.rowTable}>
-                                    <td><input type="checkbox" onChange={(e) => handleSelectProduct(e, item.MaSP)} /></td>
+                                    <td style={{ width: "30px" }}><input type="checkbox" onChange={(e) => handleSelectProduct(e, item.MaSP)} /></td>
                                     <td>{item.MaSP}</td>
-                                    <td style={{ width: "300px" }}>{item.TenSP}</td>
+                                    <td >{item.TenSP}</td>
                                     <td>{categories.find(cat => cat.MaLoai == item.MaLoai).TenLoai}</td>
                                     {/* <td>{item.MoTa}</td> */}
                                     <td>{item.SoLuongCon}</td>
@@ -170,20 +217,24 @@ const Products = () => {
                                     <td>{item.PhiLapDat}</td>
                                     <td><Image style={{ marginTop: "4px" }} width={60} height={40} src={item.HinhAnh} alt="aaaa" /></td>
                                     <td className={Styles.actionBtn}>
-                                        <button className={Styles.Edit} onClick={Toastify}><FaEdit /></button>
-                                        <button className={Styles.Delete} onClick={() => handleDeleteOne(item)}><MdDelete /></button>
+                                        <button className={Styles.Edit} onClick={Toastify}>
+                                            <FaEdit />
+                                        </button>
+                                        <button className={Styles.Delete} onClick={() => handleDeleteOne(item)}>
+                                            <MdDelete />
+                                        </button>
                                     </td>
                                 </tr>
                             ))
 
 
-                            : (<div>Loading ...</div>)
+                            : (<td colSpan={9} style={{ height: '200px' }}><div>Không có sản phẩm nào được tìm thấy</div></td>)
                         }
                     </tbody>
                 </table>
             </div>
             <div className={Styles.pagination}>
-                <button onClick={Toastify}>&#60;</button>
+                <button onClick={handlePrevPage}>&#60;</button>
                 <ul>
                     {
                         products && products.map((item, index) => (
@@ -191,7 +242,7 @@ const Products = () => {
                         ))
                     }
                 </ul>
-                <button onClick={Toastify}>&#62;</button>
+                <button onClick={handleNextPage}>&#62;</button>
             </div>
             <div style={!display ? { display: "none" } : { display: "" }} onClick={() => handleChildDisplayChange(!display)} className={Styles.blur}>
 
@@ -201,7 +252,7 @@ const Products = () => {
                 <AddProduct display={display} setDisplay={handleChildDisplayChange} categories={categories} setIsSubmit={setIsSubmit} />
             </div>
 
-            <RepairService service={service} />
+            {/* <RepairService service={service} /> */}
 
         </div>
     )

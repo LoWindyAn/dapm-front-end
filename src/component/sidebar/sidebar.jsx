@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Styles from './sidebar.module.css'
 import { usePathname } from 'next/navigation'
 import { ToastContainer, toast } from 'react-toastify'
+import { useState } from 'react'
 
 
 const menu = [
@@ -49,7 +50,7 @@ const menu = [
 ]
 
 const SideBar = () => {
-
+    const [loading, setLoading] = useState(false);
     const pathname = usePathname().split('/');
     const endpath = "/" + pathname[2];
 
@@ -68,7 +69,7 @@ const SideBar = () => {
     }
 
     return (
-        <div className={Styles.container} >
+        <div className={Styles.container}>
             <ToastContainer />
             {menu.map(item => {
                 return (

@@ -5,6 +5,8 @@ import cloudinary from 'cloudinary'
 import config from '@/cloudinary.config'
 import axios from 'axios';
 import HashLoader from "react-spinners/HashLoader"
+import { RingLoader } from 'react-spinners';
+import { ToastContainer, toast } from 'react-toastify';
 
 cloudinary.config(config)
 
@@ -40,13 +42,6 @@ const AddProduct = (props) => {
         reader.readAsDataURL(imageFile);
     };
 
-    useEffect(() => {
-        if (image) {
-            upLoadfile()
-            console.log(product);
-        }
-    }, [image])
-
     const upLoadfile = async () => {
         const formData = new FormData();
         formData.append('file', image);
@@ -67,6 +62,7 @@ const AddProduct = (props) => {
                 ['HinhAnh']: response.data.secure_url
             })
             await setPublicId(response.data.public_id)
+            return response.data.secure_url
         } catch (error) {
             console.log(error);
         }
@@ -96,25 +92,48 @@ const AddProduct = (props) => {
         })
     }
 
-    const handleSubmit = () => {
-        setLoadSubmit(true)
-        setTimeout(async () => {
-            const res = await axios.post('http://localhost:3500/products/', product);
-            setLoadSubmit(false)
+    const handleSubmit = async () => {
+        if (!product.MaSP || !product.TenSP || !product.MoTa || !product.DonGia || !product.PhiLapDat || !product.SoLuongCon || !image) {
+            toast.error('Vui lòng nhập đủ thông tin linh kiện!', {
+                position: "top-center",
+                autoClose: 1200,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            });
+            toast()
+        } else {
+            setLoadSubmit(true)
+            const HinhAnh = await upLoadfile()
+            const res = await axios.post('http://localhost:3500/products/', {
+                MaSP: product.MaSP,
+                TenSP: product.TenSP,
+                MoTa: product.MoTa,
+                DonGia: product.DonGia,
+                PhiLapDat: product.PhiLapDat,
+                SoLuongCon: product.SoLuongCon,
+                HinhAnh: HinhAnh,
+                MaNCC: product.MaNCC,
+                MaLoai: product.MaLoai
+            });
             setIsSubmit(true)
             setProduct({
                 "MaSP": "",
                 "TenSP": "",
                 "MoTa": "",
-                "DonGia": 0,
-                "PhiLapDat": 0,
-                "SoLuongCon": 0,
+                "DonGia": '',
+                "PhiLapDat": '',
+                "SoLuongCon": '',
                 "HinhAnh": "",
                 "MaNCC": "NCC00002",
                 "MaLoai": "LLK00001"
             })
+            setLoadSubmit(false)
             setDisplay(!display)
-        }, 2000)
+        }
     }
 
     return (
@@ -136,11 +155,11 @@ const AddProduct = (props) => {
                 </div>
                 <div className={Styles.part2}>
                     <div className={Styles.part2M}>
-                        <label htmlFor="">Mã sản phẩm</label>
+                        <label htmlFor="">Mã linh kiện</label>
                         <input style={{ width: '100px' }} name="MaSP" type="text" value={product.MaSP} onChange={handleChangeProduct} />
                     </div>
                     <div className={Styles.part2M}>
-                        <label htmlFor="">Tên sản phẩm</label>
+                        <label htmlFor="">Tên linh kiện</label>
                         <input style={{ width: '310px' }} name="TenSP" type="text" value={product.TenSP} onChange={handleChangeProduct} />
                     </div>
                 </div>
@@ -176,7 +195,7 @@ const AddProduct = (props) => {
             {
                 loadSubmit &&
                 <div className={Styles.HashLoader}>
-                    <HashLoader color="#36d7b7" size={100} />
+                    <RingLoader color="#1802ff" size={100} />
                 </div>
             }
 
