@@ -137,7 +137,7 @@ const UpdateProduct = (props) => {
 
     return (
         <div className={Styles.container} style={!display ? { display: "none" } : { display: "" }}>
-            <p>Sửa linh kiện</p>
+            <p>Sửa thông tin linh kiện</p>
             <div className={Styles.content}>
                 <div className={Styles.part1}>
                     <Image className={Styles.img} src={imageURL} width={100} height={80} alt='Chọn hình ảnh linh kiện' />

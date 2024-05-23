@@ -25,7 +25,7 @@ const menu = [
     {
         title: "NHÀ CUNG CẤP",
         url: "/manufacturer",
-        type: false
+        type: true
     },
     {
         title: "KHÁCH HÀNG",
