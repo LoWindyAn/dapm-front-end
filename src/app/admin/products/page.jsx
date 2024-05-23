@@ -225,7 +225,8 @@ const Products = () => {
                 <table className={Styles.table}>
                     <thead>
                         <tr>
-                            <td style={{ width: "30px" }}><input type="checkbox" /></td>
+                            {/* <td style={{ width: "30px" }}><input type="checkbox" /></td> */}
+                            <td style={{ width: "40px" }}>STT</td>
                             <td>Mã linh kiện</td>
                             <td style={{ width: "300px" }}>Tên linh kiện</td>
                             <td>Loại linh kiện</td>
@@ -242,7 +243,8 @@ const Products = () => {
                             ?
                             products[page - 1].map((item, index) => (
                                 <tr key={index} className={Styles.rowTable}>
-                                    <td style={{ width: "30px" }}><input type="checkbox" onChange={(e) => handleSelectProduct(e, item.MaSP)} /></td>
+                                    {/* <td style={{ width: "30px" }}><input type="checkbox" onChange={(e) => handleSelectProduct(e, item.MaSP)} /></td> */}
+                                    <td>{index + 1}</td>
                                     <td>{item.MaSP}</td>
                                     <td >{item.TenSP}</td>
                                     <td>{categories.find(cat => cat.MaLoai == item.MaLoai).TenLoai}</td>

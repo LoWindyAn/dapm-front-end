@@ -1,16 +1,16 @@
 
 "use client"
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import Styles from './manufacturer.module.css'
+import Styles from './repair.module.css'
 import { FaSearch, FaEdit, FaPlus } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
-import Addmanufacture from '@/component/addmanufacture/Addmanufacture';
-import Updatemanufacture from '@/component/updatemanufacture/updatemanufacture';
+import AddRepair from '@/component/addrepair/Addrepair';
+import Updaterepair from '@/component/updaterepair/updaterepair';
 
-const Manufacturer = () => {
+const Repair = () => {
     const searchParams = useSearchParams();
     const pathname = usePathname()
     const router = useRouter()
@@ -18,7 +18,7 @@ const Manufacturer = () => {
     const [display, setDisplay] = useState(true);
     const [isSubmit, setIsSubmit] = useState(false)
     const [deleteItem, setDeleteItem] = useState([])
-    const [typeSearch, setTypeSearch] = useState('TenNCC')
+    const [typeSearch, setTypeSearch] = useState('TenSC')
     const [displayUpdate, setDisplayUpdate] = useState(false)
     const [isUpdate, setIsUpdate] = useState(false)
     const [manufactures, setManufactures] = useState(null)
@@ -26,7 +26,7 @@ const Manufacturer = () => {
 
     const fetchProducts = async (search) => {
         if (!search) { search = '' }
-        const manufac = await axios.get(`http://localhost:3500/manufacture/search?type=${typeSearch}&search=${search}`)
+        const manufac = await axios.get(`http://localhost:3500/repair?type=${typeSearch}&search=${search}`)
         setManufactures(chunkArray(manufac.data, 7))
     }
 
@@ -128,10 +128,10 @@ const Manufacturer = () => {
     };
 
     const handleDeleteOne = async (item) => {
-        const ItemDL = [item.MaNCC]
+        const ItemDL = [item.MaSuaChua]
 
         try {
-            const response = await axios.delete('http://localhost:3500/manufacture/', {
+            const response = await axios.delete('http://localhost:3500/repair', {
                 data: { productIds: ItemDL }
             });
             console.log(response);
@@ -178,11 +178,11 @@ const Manufacturer = () => {
     return (
         <div className={Styles.container}>
             <ToastContainer />
-            <p className={Styles.title}>Nhà cung cấp</p>
+            <p className={Styles.title}>Dịch vụ sửa chữa</p>
             <div className={Styles.actionbar}>
                 <select className={Styles.dropdown} onChange={handleChangleType}>
-                    <option value="TenNCC">Tên NCC</option>
-                    <option value="MaNCC">Mã NCC</option>
+                    <option value="TenSC">Loại sửa chữa</option>
+                    <option value="MaSuaChua">Mã loại</option>
                 </select>
                 <div className={Styles.BoxSearch}>
                     <input onChange={handleSearch} type="text" placeholder='Tìm kiếm' className={Styles.inputSearch} />
@@ -193,11 +193,11 @@ const Manufacturer = () => {
             </div>
 
             <div className={`${Styles.addManufacture} ${display ? '' : Styles.show}`}>
-                <Addmanufacture display={display} setDisplay={handleChildDisplayChange} setIsSubmit={setIsSubmit} />
+                <AddRepair display={display} setDisplay={handleChildDisplayChange} setIsSubmit={setIsSubmit} />
             </div>
 
             <div className={`${Styles.updateManufacture} ${!displayUpdate ? '' : Styles.show}`}>
-                <Updatemanufacture amanufacture={manufacture} display={displayUpdate} setDisplay={handleChildDisplayUpdateChange} setIsSubmit={setIsSubmit} />
+                <Updaterepair amanufacture={manufacture} display={displayUpdate} setDisplay={handleChildDisplayUpdateChange} setIsSubmit={setIsSubmit} />
             </div>
             <div className={Styles.aroundTable}>
                 <p>Danh sách nhà cung cấp</p>
@@ -206,11 +206,9 @@ const Manufacturer = () => {
                         <tr>
                             {/* <td style={{ width: "30px" }}><input type="checkbox" /></td> */}
                             <td style={{ width: "40px" }}>STT</td>
-                            <td style={{ width: "150px" }}>Mã nhà cung cấp</td>
-                            <td style={{ width: "300px" }}>Tên nhà cung cấp</td>
-                            <td style={{ width: "150px" }}>Số điện thoại</td>
-                            {/* <td>Mô tả</td> */}
-                            <td>Địa chỉ</td>
+                            <td style={{ width: "150px" }}>Mã loại</td>
+                            <td style={{ width: "300px" }}>Loại sửa chữa</td>
+                            <td style={{ width: "150px" }}>Phí sửa</td>
                             <td style={{ width: "200px" }}>Hành động</td>
                         </tr>
                     </thead>
@@ -221,10 +219,9 @@ const Manufacturer = () => {
                                 <tr key={index} className={Styles.rowTable}>
                                     {/* <td style={{ width: "30px" }}><input type="checkbox" onChange={(e) => handleSelectProduct(e, item.MaSP)} /></td> */}
                                     <td>{index + 1}</td>
-                                    <td>{item.MaNCC}</td>
-                                    <td >{item.TenNCC}</td>
-                                    <td>{item.SDT}</td>
-                                    <td>{item.DiaChi}</td>
+                                    <td>{item.MaSuaChua}</td>
+                                    <td >{item.TenSC}</td>
+                                    <td>{item.PhiSua}</td>
                                     <td className={Styles.actionBtn}>
                                         <button className={Styles.Edit} onClick={() => handleUpdate(item)}>
                                             <FaEdit />
@@ -257,4 +254,4 @@ const Manufacturer = () => {
     )
 }
 
-export default Manufacturer
+export default Repair

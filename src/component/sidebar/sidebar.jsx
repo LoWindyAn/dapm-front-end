@@ -13,14 +13,14 @@ const menu = [
         type: false
     },
     {
-        title: "LINH KIỆN - DỊCH VỤ",
+        title: "LINH KIỆN ĐIỆN TỬ",
         url: "/products",
         type: true
     },
     {
         title: "DỊCH VỤ SỬA CHỮA",
         url: "/repair",
-        type: false
+        type: true
     },
     {
         title: "NHÀ CUNG CẤP",
