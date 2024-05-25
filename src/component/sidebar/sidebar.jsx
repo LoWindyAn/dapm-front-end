@@ -30,7 +30,7 @@ const menu = [
     {
         title: "KHÁCH HÀNG",
         url: "/customer",
-        type: false
+        type: true
     },
     {
         title: "YÊU CẦU",

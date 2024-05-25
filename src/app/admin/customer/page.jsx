@@ -1,16 +1,16 @@
 
 "use client"
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import Styles from './repair.module.css'
-import { FaSearch, FaEdit, FaPlus } from "react-icons/fa";
+import Styles from './customer.module.css'
+import { FaSearch, FaEdit, FaPlus, FaEye } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
-import AddRepair from '@/component/addrepair/Addrepair';
-import Updaterepair from '@/component/updaterepair/updaterepair';
+import AddCustomer from '@/component/customer/AddCustomer/AddCustomer';
+import UpdateCustomer from '@/component/customer/UpdateCustomer/UpdateCustomer';
 
-const Repair = () => {
+const Customer = () => {
     const searchParams = useSearchParams();
     const pathname = usePathname()
     const router = useRouter()
@@ -18,7 +18,7 @@ const Repair = () => {
     const [display, setDisplay] = useState(true);
     const [isSubmit, setIsSubmit] = useState(false)
     const [deleteItem, setDeleteItem] = useState([])
-    const [typeSearch, setTypeSearch] = useState('TenSC')
+    const [typeSearch, setTypeSearch] = useState('SDT')
     const [displayUpdate, setDisplayUpdate] = useState(false)
     const [isUpdate, setIsUpdate] = useState(false)
     const [manufactures, setManufactures] = useState(null)
@@ -26,7 +26,7 @@ const Repair = () => {
 
     const fetchProducts = async (search) => {
         if (!search) { search = '' }
-        const manufac = await axios.get(`http://localhost:3500/repair/search?type=${typeSearch}&search=${search}`)
+        const manufac = await axios.get(`http://localhost:3500/customer/search?type=${typeSearch}&search=${search}`)
         setManufactures(chunkArray(manufac.data, 7))
     }
 
@@ -128,10 +128,10 @@ const Repair = () => {
     };
 
     const handleDeleteOne = async (item) => {
-        const ItemDL = [item.MaSuaChua]
+        const ItemDL = [item.MaKH]
 
         try {
-            const response = await axios.delete('http://localhost:3500/repair', {
+            const response = await axios.delete('http://localhost:3500/customer/', {
                 data: { productIds: ItemDL }
             });
             console.log(response);
@@ -175,40 +175,48 @@ const Repair = () => {
         setDisplay(!display)
     }
 
+    const handleView = (item) => {
+        router.push(`http://localhost:3000/admin/customer/${item.MaKH}`)
+    }
+
     return (
         <div className={Styles.container}>
             <ToastContainer />
-            <p className={Styles.title}>Dịch vụ sửa chữa</p>
+            <p className={Styles.title}>Khách hàng</p>
             <div className={Styles.actionbar}>
                 <select className={Styles.dropdown} onChange={handleChangleType}>
-                    <option value="TenSC">Loại sửa chữa</option>
-                    <option value="MaSuaChua">Mã loại</option>
+                    <option value="SDT">Số điện thoại</option>
+                    <option value="TenKH">Tên khách hàng</option>
                 </select>
                 <div className={Styles.BoxSearch}>
                     <input onChange={handleSearch} type="text" placeholder='Tìm kiếm' className={Styles.inputSearch} />
                     <FaSearch className={Styles.btnSearch} size={20} />
                 </div>
-                <button className={`${Styles.btnAdd} ${display ? Styles.btnAddShow : ''}`} onClick={handleClickAdd}><FaPlus />Dịch vụ mới </button>
+                <button className={`${Styles.btnAdd} ${display ? Styles.btnAddShow : ''}`} onClick={handleClickAdd}><FaPlus />Khách hàng mới </button>
                 <button className={Styles.btnDelete} onClick={handleClickDelete}>Xóa NCC <MdDelete size={15} /></button>
             </div>
 
             <div className={`${Styles.addManufacture} ${display ? '' : Styles.show}`}>
-                <AddRepair display={display} setDisplay={handleChildDisplayChange} setIsSubmit={setIsSubmit} />
+                <AddCustomer display={display} setDisplay={handleChildDisplayChange} setIsSubmit={setIsSubmit} />
             </div>
 
             <div className={`${Styles.updateManufacture} ${!displayUpdate ? '' : Styles.show}`}>
-                <Updaterepair amanufacture={manufacture} display={displayUpdate} setDisplay={handleChildDisplayUpdateChange} setIsSubmit={setIsSubmit} />
+                <UpdateCustomer amanufacture={manufacture} display={displayUpdate} setDisplay={handleChildDisplayUpdateChange} setIsSubmit={setIsSubmit} />
             </div>
             <div className={Styles.aroundTable}>
-                <p>Danh sách dịch vụ</p>
+                <p>Danh sách khách hàng</p>
                 <table className={Styles.table}>
                     <thead>
                         <tr>
                             {/* <td style={{ width: "30px" }}><input type="checkbox" /></td> */}
                             <td style={{ width: "40px" }}>STT</td>
-                            <td style={{ width: "150px" }}>Mã loại</td>
-                            <td style={{ width: "300px" }}>Loại sửa chữa</td>
-                            <td style={{ width: "150px" }}>Phí sửa</td>
+                            <td style={{ width: "120px" }}>Mã khách hàng</td>
+                            <td style={{ width: "200px" }}>Tên khách hàng</td>
+                            <td style={{ width: "120px" }}>Ngày sinh</td>
+                            <td style={{ width: "80px" }}>Giới tính</td>
+                            <td style={{ width: "120px" }}>Số điện thoại</td>
+                            <td style={{ width: "150px" }}>Email</td>
+                            <td>Địa chỉ</td>
                             <td style={{ width: "200px" }}>Hành động</td>
                         </tr>
                     </thead>
@@ -219,10 +227,17 @@ const Repair = () => {
                                 <tr key={index} className={Styles.rowTable}>
                                     {/* <td style={{ width: "30px" }}><input type="checkbox" onChange={(e) => handleSelectProduct(e, item.MaSP)} /></td> */}
                                     <td>{index + 1}</td>
-                                    <td>{item.MaSuaChua}</td>
-                                    <td >{item.TenSC}</td>
-                                    <td>{item.PhiSua}</td>
+                                    <td>{item.MaKH}</td>
+                                    <td >{item.TenKH}</td>
+                                    <td>{item.NgaySinh && item.NgaySinh.slice(0, 10)}</td>
+                                    <td>{item.GioiTinh == 0 ? 'Nữ' : 'Nam'}</td>
+                                    <td>{item.SDT}</td>
+                                    <td>{item.Email}</td>
+                                    <td>{item.DiaChi}</td>
                                     <td className={Styles.actionBtn}>
+                                        <button className={Styles.View} onClick={() => handleView(item)}>
+                                            <FaEye />
+                                        </button>
                                         <button className={Styles.Edit} onClick={() => handleUpdate(item)}>
                                             <FaEdit />
                                         </button>
@@ -254,4 +269,4 @@ const Repair = () => {
     )
 }
 
-export default Repair
+export default Customer

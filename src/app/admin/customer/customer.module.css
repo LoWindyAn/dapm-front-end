@@ -5,18 +5,9 @@
 
 .title {
     font-weight: bold;
-    border-bottom: 2px solid var(--color1);
-    width: 100%;
-    /* padding: 0 8px; */
-    height: 24px;
     font-size: 20px;
-    /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: var(--color1);
-    /* background-color: var(--color1); */
-    display: flex;
-    /* border-radius: 12px; */
-    /* align-items: center; */
-    /* justify-content: center; */
 }
 
 .actionbar {
@@ -76,10 +67,14 @@
     padding: 7px;
     border: none;
     font-weight: bold;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     gap: 8px;
+}
+
+.btnAddShow {
+    display: flex;
 }
 
 .btnDelete {
@@ -115,8 +110,37 @@
     color: white;
 }
 
+.addManufacture {
+    height: 280px;
+    display: none;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+.updateManufacture {
+    height: 280px;
+    display: none;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+.show {
+    display: block;
+    transform: translateY(0);
+    opacity: 1;
+}
+
 .aroundTable {
+    margin-top: 20px;
     height: 400px;
+}
+
+.aroundTable>p {
+    font-weight: bold;
+    margin: 20px 0 10px 0;
+    font-size: 16px;
 }
 
 .table {
@@ -135,6 +159,7 @@
     height: 32px;
     padding-top: 10px;
     font-weight: bold;
+    font-size: 12px;
 }
 
 .table tbody tr:hover {
@@ -174,6 +199,16 @@
 
 .Delete:hover {
     background-color: rgb(225, 8, 8);
+    color: rgb(255, 255, 255);
+}
+
+.View {
+    border: 2px solid #004ce4;
+    color: #004ce4;
+}
+
+.View:hover {
+    background-color: #004ce4;
     color: rgb(255, 255, 255);
 }
 
@@ -229,47 +264,9 @@
     color: white !important;
 }
 
-.addproduct {
-    position: fixed;
-    top: 10%;
-    left: 40%;
-    opacity: 0;
-    transform: translateY(-20px);
-    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-}
 
-.blur {
-    width: 1000vh;
-    height: 100%;
-    background-color: #000000;
-    opacity: 50%;
-    position: fixed;
-    top: 0;
-    left: 0;
-}
 
-.updateproduct {
-    position: fixed;
-    top: 10%;
-    left: 40%;
-    opacity: 0;
-    transform: translateY(-20px);
-    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-}
 
-.blurUpdate {
-    width: 1000vh;
-    height: 100%;
-    background-color: #000000;
-    opacity: 50%;
-    position: fixed;
-    top: 0;
-    left: 0;
-}
 
-.show {
-    opacity: 1;
-    transform: translateY(0);
-}
 
 /*******************************************************************/

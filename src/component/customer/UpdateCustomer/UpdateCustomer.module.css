@@ -1,0 +1,113 @@
+.container {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-top: 2px solid black;
+    border-bottom: 1px solid black;
+}
+
+.container>h1 {
+    font-weight: bold;
+    text-align: center;
+    font-size: 20px;
+    color: var(--color1);
+}
+
+.subcontainer {
+    display: flex;
+    margin-top: 24px;
+}
+
+.subcontainerr {
+    display: flex;
+}
+
+.part2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.part2M {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 10px;
+}
+
+.part2M label {
+    font-weight: 500;
+}
+
+.part2M>input {
+    height: 24px;
+    border-radius: 4px;
+    border-color: var(--color3);
+    width: 200px;
+}
+
+.datePicker {
+    height: 24px;
+    border-radius: 4px;
+    border-color: var(--color3);
+    width: 200px;
+}
+
+.containerGioitinh {
+    /* width: 250px;
+    gap: 10px;
+    margin: 10px;
+    display: flex;
+    justify-content: start;
+    flex-direction: row; */
+    display: flex;
+}
+
+.gioitinh {
+    display: flex;
+    justify-content: center;
+    width: 50px;
+}
+
+
+.btn {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    margin-right: 10%;
+    margin-top: 16px;
+}
+
+.btn button {
+    height: 40px;
+    width: 100px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+}
+
+.btnAdd {
+    background: white;
+    border-color: var(--color2);
+    color: var(--color2);
+}
+
+.btnAdd:hover {
+    background-color: var(--color2);
+    color: white;
+}
+
+.btnCancel {
+    background: white;
+    border-color: #dbdb00;
+    color: #dbdb00;
+}
+
+.btnCancel:hover {
+    background-color: #dbdb00;
+    color: white;
+}
