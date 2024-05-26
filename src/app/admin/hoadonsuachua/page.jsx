@@ -9,6 +9,7 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import TaoHoaDon from '@/component/hoadon/suachua/TaoHoaDon';
 import CapnhatHoaDon from '@/component/hoadon/suachua/CapnhatHoaDon';
+import XemHoaDon from '@/component/hoadon/suachua/xemHoaDon';
 
 const DSHoadon = () => {
     const searchParams = useSearchParams();
@@ -26,6 +27,9 @@ const DSHoadon = () => {
     const [hoadon, setHoadon] = useState({})
     const [dichvu, setDichvu] = useState([])
     const [linhkien, setLinhkien] = useState([])
+    const [displayView, setDisplayView] = useState(false)
+    const [viewHoadon, setViewHoaDon] = useState({})
+    const [isView, setIsView] = useState(false)
 
     const fetchProducts = async (search) => {
         if (!search) { search = '' }
@@ -163,7 +167,7 @@ const DSHoadon = () => {
         if (!displayUpdate) {
             setDisplayUpdate(true)
         }
-    }, [hoadon])
+    }, [hoadon, isUpdate])
 
     useEffect(() => {
         setDisplayUpdate(false)
@@ -171,6 +175,22 @@ const DSHoadon = () => {
 
     const handleDisplayUpdate = (item) => {
         setHoadon(item)
+        setIsUpdate(!isUpdate)
+    }
+
+    useEffect(() => {
+        if (!displayView) {
+            setDisplayView(true)
+        }
+    }, [viewHoadon, isView])
+
+    useEffect(() => {
+        setDisplayView(false)
+    }, [])
+
+    const handleView = (item) => {
+        setViewHoaDon(item)
+        setIsView(!isView)
     }
 
     return (
@@ -265,6 +285,16 @@ const DSHoadon = () => {
                     <div className={Styles.Overlay}></div>
                     <div className={Styles.TaoHoaDon}>
                         <CapnhatHoaDon linhkien={linhkien} ahoadon={hoadon} dichvu={dichvu} khachhang={khachhang} setDisplay={setDisplayUpdate} setIsSubmit={setIsSubmit} />
+                    </div>
+                </div>
+            }
+
+            {
+                displayView &&
+                <div className={Styles.modalTaoHoaDon}>
+                    <div className={Styles.Overlay}></div>
+                    <div className={Styles.TaoHoaDon}>
+                        <XemHoaDon linhkien={linhkien} ahoadon={viewHoadon} dichvu={dichvu} khachhang={khachhang} setDisplay={setDisplayView} setIsSubmit={setIsSubmit} />
                     </div>
                 </div>
             }

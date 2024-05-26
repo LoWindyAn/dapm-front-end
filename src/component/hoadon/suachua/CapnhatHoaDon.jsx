@@ -76,6 +76,10 @@ const TaoHoaDon = (props) => {
         setDisplay(false)
     }
 
+    const handleCancel = () => {
+        setDisplay(false)
+    }
+
     return (
         <div className={Styles.container}>
             <div className={Styles.title}>
@@ -219,7 +223,7 @@ const TaoHoaDon = (props) => {
             </div>
             <div className={Styles.btn}>
                 <button className={Styles.btnAdd} onClick={handleSubmit} ><FaSave />Lưu</button>
-                <button className={Styles.btnCancel} onClick={() => setDisplay(false)}>Hủy</button>
+                <button className={Styles.btnCancel} onClick={handleCancel}>Hủy</button>
             </div>
         </div>
     )

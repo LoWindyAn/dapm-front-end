@@ -10,7 +10,7 @@ const menu = [
     {
         title: "TÀI KHOẢN",
         url: "/accounts",
-        type: true
+        type: false
     },
     {
         title: "NHÀ CUNG CẤP",
@@ -33,11 +33,11 @@ const menu = [
         url: "/customer",
         type: true
     },
-    {
-        title: "YÊU CẦU",
-        url: "/requests",
-        type: false
-    },
+    // {
+    //     title: "YÊU CẦU",
+    //     url: "/requests",
+    //     type: false
+    // },
     {
         title: "HÓA ĐƠN",
         url: "/hoadonsuachua",

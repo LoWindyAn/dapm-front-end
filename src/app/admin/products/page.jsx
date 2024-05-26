@@ -210,7 +210,7 @@ const Products = () => {
                     <FaSearch className={Styles.btnSearch} size={20} />
                 </div>
                 <button className={Styles.btnAdd} onClick={() => setDisplay(!display)}><FaPlus />Thêm linh kiện </button>
-                <button className={Styles.btnDelete} onClick={handleClickDelete}>Xóa linh kiện <MdDelete size={15} /></button>
+                {/* <button className={Styles.btnDelete} onClick={handleClickDelete}>Xóa linh kiện <MdDelete size={15} /></button> */}
                 <select className={Styles.dropdown} onChange={handleChangleMaloai}>
                     <option value="">Tất cả</option>
                     {

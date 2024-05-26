@@ -14,7 +14,7 @@ const Header = () => {
                 </div>
             </div>
             <div className={Styles.header_right}>
-                <MdOutlineMenu color='white' size={40} />
+                {/* <MdOutlineMenu color='white' size={40} /> */}
                 <p>QUẢN LÝ SỬA CHỮA VÀ LẮP ĐẶT LINH KIỆN ĐIỆN – ĐIỆN TỬ</p>
             </div >
         </div >

@@ -189,7 +189,7 @@ const Repair = () => {
                     <FaSearch className={Styles.btnSearch} size={20} />
                 </div>
                 <button className={`${Styles.btnAdd} ${display ? Styles.btnAddShow : ''}`} onClick={handleClickAdd}><FaPlus />Dịch vụ mới </button>
-                <button className={Styles.btnDelete} onClick={handleClickDelete}>Xóa NCC <MdDelete size={15} /></button>
+                {/* <button className={Styles.btnDelete} onClick={handleClickDelete}>Xóa NCC <MdDelete size={15} /></button> */}
             </div>
 
             <div className={`${Styles.addManufacture} ${display ? '' : Styles.show}`}>
