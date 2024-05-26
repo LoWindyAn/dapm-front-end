@@ -9,7 +9,7 @@ const Header = () => {
                     src='https://cdn.thoitiet247.edu.vn/wp-content/uploads/2024/03/avatar-xam-1.jpg'
                     alt='' width={50} height={50} />
                 <div className={Styles.inforStaff}>
-                    <p>Quốc Sang</p>
+                    <p>Admin</p>
                     <p>Admin</p>
                 </div>
             </div>

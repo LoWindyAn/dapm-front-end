@@ -4,6 +4,7 @@ import Styles from './login.module.css'
 import { ToastContainer, toast } from 'react-toastify';
 import { redirect } from 'next/navigation';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import axios from 'axios';
 
 const LoginPage = () => {
 
@@ -11,6 +12,7 @@ const LoginPage = () => {
         username: "",
         password: ""
     });
+    const [logins, setLogins] = useState('')
     const [tipe, setTipe] = useState(false)
 
     const handleOnchange = (e) => {
@@ -28,9 +30,14 @@ const LoginPage = () => {
         setTipe(!tipe)
     }
 
-    const handleSubmit = () => {
-        toast.success(`Login success`)
+    const handleSubmit = async () => {
+
+        // const res = await axios.post('http://localhost:3500/login', infoLogin)
+        // if (res.status == 200) {
         redirect('./admin')
+        // }
+        // console.log(res);
+
     }
     return (
         <div className={Styles.container}>
@@ -42,6 +49,8 @@ const LoginPage = () => {
                 {tipe ? <FaEye className={Styles.eye} onClick={ChangeTipe} /> : <FaEyeSlash className={Styles.eye} onClick={ChangeTipe} />}
                 <button type='submit' className={`${Styles.button}`}>Login</button>
             </form>
+            <p>{logins}</p>
+
         </div>
     )
 }

@@ -1,0 +1,184 @@
+.container {
+    width: 650px;
+    height: 550px;
+    background: white;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    padding: 20px;
+
+}
+
+.title {
+    height: 32px;
+    font-size: 24px;
+    font-family: sans-serif;
+    border-bottom: 1px solid var(--color1);
+    width: 100%;
+}
+
+.title p {
+    font-weight: bold;
+}
+
+.information {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 24px 12px;
+    overflow-y: scroll;
+    height: 500px;
+}
+
+.boxInforKH {
+    border: 1px solid black;
+    padding: 12px;
+    border-radius: 8px;
+
+}
+
+.boxInforKH h3 {
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.inforKH {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.inforKH th {
+    text-align: right;
+    font-weight: bold;
+    width: 150px;
+    padding-right: 16px;
+    border-right: 1px solid white;
+}
+
+.inforKH td {
+    padding-left: 12px;
+}
+
+.inforKH1 {
+    background: #7bc7c9;
+    height: 28px;
+    align-content: center;
+}
+
+.inforKH2 {
+    height: 28px;
+    align-content: center;
+}
+
+
+.inforSC {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.ContainerTrangThai {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.TrangThaiHD {
+    display: flex;
+    flex-direction: column;
+}
+
+.TrangThaiHD>p {
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.TienDoHD>p {
+    font-weight: bold;
+    margin-bottom: 12px;
+    margin-top: 24px;
+}
+
+
+
+.information label {
+    margin-right: 8px;
+    display: inline-block;
+    width: 100px;
+    font-weight: 500;
+}
+
+.information input {
+    width: 300px;
+    height: 24px;
+    border-radius: 4px;
+    border-color: rgb(226, 226, 226);
+}
+
+.information select {
+    width: 308px;
+    height: 32px;
+    border-radius: 4px;
+    border-color: rgb(226, 226, 226);
+    border: 1px solid;
+}
+
+
+.linhkienthay .header th,
+.linhkienthay tbody td {
+    width: 200px;
+    border: 1px solid black;
+    height: 28px;
+    text-align: center;
+    align-content: center;
+}
+
+.linhkienthay .header th {
+    background-color: var(--color2);
+    color: white;
+    font-weight: 500;
+}
+
+.btn {
+    border-top: 1px solid #000;
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    padding: 24px;
+}
+
+.btn button {
+    width: 100px;
+    height: 40px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+}
+
+.btnAdd {
+    background: white;
+    border-color: var(--color2);
+    color: var(--color2);
+}
+
+.btnAdd:hover {
+    background-color: var(--color2);
+    color: white;
+}
+
+.btnCancel {
+    background: white;
+    border-color: #dbdb00;
+    color: #dbdb00;
+}
+
+.btnCancel:hover {
+    background-color: #dbdb00;
+    color: white;
+}

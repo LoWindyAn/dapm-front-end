@@ -39,8 +39,13 @@ const menu = [
     //     type: false
     // },
     {
-        title: "HÓA ĐƠN",
+        title: "HÓA ĐƠN SỬA CHỮA",
         url: "/hoadonsuachua",
+        type: true
+    },
+    {
+        title: "HÓA ĐƠN LẮP ĐẶT",
+        url: "/hoadonlapdat",
         type: true
     },
     {
