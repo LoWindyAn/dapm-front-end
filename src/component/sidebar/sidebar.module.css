@@ -12,16 +12,25 @@
     gap: 4px;
 }
 
+
+
+.listLink {
+    height: 60px;
+    font-weight: 500;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+
+
 .link {
     text-decoration: none;
     color: black;
-    height: 30px;
     padding: 20px 5% 10px 5%;
-    font-weight: 500;
-    border-radius: 5px;
+
 }
 
-.link:hover {
+.listLink:hover {
     background-color: rgb(101, 115, 126);
 }
 

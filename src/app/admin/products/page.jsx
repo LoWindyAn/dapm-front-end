@@ -4,12 +4,11 @@ import Styles from './products.module.css'
 import { FaSearch, FaEdit, FaPlus } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { useEffect, useState } from 'react';
-import AddProduct from '@/component/addproduct/addproduct';
+import AddProduct from '@/component/product/addproduct/addproduct';
 import axios from 'axios';
 import Image from 'next/image';
 import { ToastContainer, toast } from 'react-toastify';
-import RepairService from '@/component/repairservice/RepairService';
-import UpdateProduct from '@/component/updateproduct/updateproduct';
+import UpdateProduct from '@/component/product/updateproduct/updateproduct';
 
 const Products = () => {
     const searchParams = useSearchParams();
@@ -297,7 +296,6 @@ const Products = () => {
                 <UpdateProduct display={displayUpdate} setDisplay={handleChildDisplayUpdateChange} manufacture={manufacture} aproduct={aproduct} categories={categories} setIsSubmit={setIsSubmit} />
             </div>
 
-            {/* <RepairService service={service} /> */}
 
         </div>
     )

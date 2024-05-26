@@ -1,22 +1,21 @@
 
 "use client"
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import Styles from './bills.module.css'
+import Styles from './hoadon.module.css'
 import { FaSearch, FaEdit, FaPlus, FaEye } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
-import Addmanufacture from '@/component/manufacture/addmanufacture/Addmanufacture';
-import Updatemanufacture from '@/component/manufacture/updatemanufacture/updatemanufacture';
 import TaoHoaDon from '@/component/hoadon/suachua/TaoHoaDon';
+import CapnhatHoaDon from '@/component/hoadon/suachua/CapnhatHoaDon';
 
 const DSHoadon = () => {
     const searchParams = useSearchParams();
     const pathname = usePathname()
     const router = useRouter()
     const [page, setPage] = useState(1)
-    const [display, setDisplay] = useState(true);
+    const [display, setDisplay] = useState(false);
     const [isSubmit, setIsSubmit] = useState(false)
     const [deleteItem, setDeleteItem] = useState([])
     const [typeSearch, setTypeSearch] = useState('SDT')
@@ -25,6 +24,8 @@ const DSHoadon = () => {
     const [manufactures, setManufactures] = useState(null)
     const [manufacture, setManufacture] = useState('')
     const [khachhang, setKhachhang] = useState([])
+    const [hoadon, setHoadon] = useState({})
+    const [dichvu, setDichvu] = useState([])
 
     const fetchProducts = async (search) => {
         if (!search) { search = '' }
@@ -32,11 +33,20 @@ const DSHoadon = () => {
         setManufactures(chunkArray(manufac.data, 7))
     }
 
-
-    useEffect(async () => {
-        fetchProducts()
+    const fetchKhachhang = async () => {
         const kh = await axios.get(`http://localhost:3500/customer`)
         setKhachhang(kh.data)
+    }
+
+    const fetchDichVu = async () => {
+        const dv = await axios.get(`http://localhost:3500/repair`)
+        setDichvu(dv.data)
+    }
+
+    useEffect(() => {
+        fetchProducts()
+        fetchKhachhang()
+        fetchDichVu()
     }, [])
 
     useEffect(() => {
@@ -44,9 +54,6 @@ const DSHoadon = () => {
         setIsSubmit(false)
     }, [isSubmit])
 
-    const handleChildDisplayChange = (newDisplay) => {
-        setDisplay(newDisplay);
-    };
     useEffect(() => {
         if (displayUpdate && display) {
             setDisplayUpdate(false)
@@ -97,13 +104,7 @@ const DSHoadon = () => {
         return chunkedArr;
     }
 
-    const handleSelectProduct = (e, MaSP) => {
-        if (e.target.checked) {
-            setDeleteItem([...deleteItem, MaSP]);
-        } else {
-            setDeleteItem(deleteItem.filter(i => i !== MaSP));
-        }
-    }
+
 
     const handleClickDelete = async () => {
         if (deleteItem.length > 0) {
@@ -155,26 +156,18 @@ const DSHoadon = () => {
     }
 
 
-    const handleUpdate = async (item) => {
-        await setManufacture(item)
-        setIsUpdate(!isUpdate)
-        handleChildDisplayUpdateChange(true)
-        scrollToTop()
-    }
-
-    const handleChildDisplayUpdateChange = (newDisplay) => {
-        setDisplayUpdate(newDisplay)
-    }
-
-    const scrollToTop = () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth',
-        });
-    };
-
     const handleClickAdd = () => {
         setDisplay(true)
+    }
+
+    useEffect(() => {
+        if (!displayUpdate) {
+            setDisplayUpdate(true)
+        }
+    }, [hoadon])
+
+    const handleDisplayUpdate = (item) => {
+        setHoadon(item)
     }
 
     return (
@@ -225,7 +218,7 @@ const DSHoadon = () => {
                                         <button className={Styles.View} onClick={() => handleView(item)}>
                                             <FaEye />
                                         </button>
-                                        <button className={Styles.Edit} onClick={() => handleUpdate(item)}>
+                                        <button className={Styles.Edit} onClick={() => handleDisplayUpdate(item)}>
                                             <FaEdit />
                                         </button>
                                         <button className={Styles.Delete} onClick={() => handleDeleteOne(item)}>
@@ -250,11 +243,21 @@ const DSHoadon = () => {
                 <button onClick={handleNextPage}>&#62;</button>
             </div>
             {
-                false &&
+                display &&
                 <div className={Styles.modalTaoHoaDon}>
                     <div className={Styles.Overlay}></div>
                     <div className={Styles.TaoHoaDon}>
-                        {/* <TaoHoaDon khachhang={khachhang} setDisplay={setDisplay} /> */}
+                        <TaoHoaDon khachhang={khachhang} setDisplay={setDisplay} setIsSubmit={setIsSubmit} />
+                    </div>
+                </div>
+            }
+
+            {
+                displayUpdate &&
+                <div className={Styles.modalTaoHoaDon}>
+                    <div className={Styles.Overlay}></div>
+                    <div className={Styles.TaoHoaDon}>
+                        <CapnhatHoaDon ahoadon={hoadon} dichvu={dichvu} khachhang={khachhang} setDisplay={setDisplayUpdate} setIsSubmit={setIsSubmit} />
                     </div>
                 </div>
             }

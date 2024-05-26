@@ -7,8 +7,8 @@ import { MdDelete } from "react-icons/md";
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
-import AddRepair from '@/component/addrepair/Addrepair';
-import Updaterepair from '@/component/updaterepair/updaterepair';
+import AddRepair from '@/component/repair/addrepair/Addrepair';
+import Updaterepair from '@/component/repair/updaterepair/updaterepair';
 
 const Repair = () => {
     const searchParams = useSearchParams();

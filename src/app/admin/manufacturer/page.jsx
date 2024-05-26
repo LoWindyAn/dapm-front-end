@@ -7,8 +7,8 @@ import { MdDelete } from "react-icons/md";
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
-import Addmanufacture from '@/component/addmanufacture/Addmanufacture';
-import Updatemanufacture from '@/component/updatemanufacture/updatemanufacture';
+import Addmanufacture from '@/component/manufacture/addmanufacture/Addmanufacture';
+import Updatemanufacture from '@/component/manufacture/updatemanufacture/updatemanufacture';
 
 const Manufacturer = () => {
     const searchParams = useSearchParams();
@@ -216,7 +216,7 @@ const Manufacturer = () => {
                     </thead>
                     <tbody>
                         {manufactures && manufactures.length > 0
-                            ?
+                            &&
                             manufactures[page - 1].map((item, index) => (
                                 <tr key={index} className={Styles.rowTable}>
                                     {/* <td style={{ width: "30px" }}><input type="checkbox" onChange={(e) => handleSelectProduct(e, item.MaSP)} /></td> */}
@@ -235,9 +235,6 @@ const Manufacturer = () => {
                                     </td>
                                 </tr>
                             ))
-
-
-                            : (<td colSpan={9} style={{ height: '200px' }}><div>Không có sản phẩm nào được tìm thấy</div></td>)
                         }
                     </tbody>
                 </table>
@@ -247,7 +244,7 @@ const Manufacturer = () => {
                 <ul>
                     {
                         manufactures && manufactures.map((item, index) => (
-                            <li onClick={handleChanglePage} value={index + 1} className={page == (index + 1) ? Styles.active : Styles.a}>{index + 1}</li>
+                            <li key={index} onClick={handleChanglePage} value={index + 1} className={page == (index + 1) ? Styles.active : Styles.a}>{index + 1}</li>
                         ))
                     }
                 </ul>

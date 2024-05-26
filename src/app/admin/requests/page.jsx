@@ -4,7 +4,7 @@ import Styles from './requests.module.css'
 import { FaSearch, FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { useEffect, useState } from 'react';
-import AddProduct from '@/component/addproduct/addproduct';
+import AddProduct from '@/component/product/addproduct/addproduct';
 import TableRepair from '@/component/table-request/table-repair/tablerepair';
 import TableInstall from '@/component/table-request/table-install/tableinstall';
 

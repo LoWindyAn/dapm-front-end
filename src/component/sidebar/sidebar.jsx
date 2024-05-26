@@ -10,7 +10,12 @@ const menu = [
     {
         title: "TÀI KHOẢN",
         url: "/accounts",
-        type: false
+        type: true
+    },
+    {
+        title: "NHÀ CUNG CẤP",
+        url: "/manufacturer",
+        type: true
     },
     {
         title: "LINH KIỆN ĐIỆN TỬ",
@@ -22,11 +27,7 @@ const menu = [
         url: "/repair",
         type: true
     },
-    {
-        title: "NHÀ CUNG CẤP",
-        url: "/manufacturer",
-        type: true
-    },
+
     {
         title: "KHÁCH HÀNG",
         url: "/customer",
@@ -39,8 +40,8 @@ const menu = [
     },
     {
         title: "HÓA ĐƠN",
-        url: "/bills",
-        type: false
+        url: "/hoadonsuachua",
+        type: true
     },
     {
         title: "BÁO CÁO THỐNG KÊ",
@@ -73,13 +74,15 @@ const SideBar = () => {
             <ToastContainer />
             {menu.map(item => {
                 return (
-                    <>
+                    <div key={item.title} className={endpath == item.url ? `${Styles.listLink} ${Styles.active}` : Styles.listLink}>
                         {item.type ?
-                            <Link className={endpath == item.url ? `${Styles.link} ${Styles.active}` : Styles.link} key={item.title} href={`/admin${item.url}`} >{item.title}</Link>
+                            <Link key={item.title} className={endpath == item.url ? `${Styles.link} ${Styles.active}` : Styles.link} href={`/admin${item.url}`} >{item.title}</Link>
                             :
-                            <Link onClick={Toastify} className={endpath == item.url ? `${Styles.link} ${Styles.active}` : Styles.link} key={item.title} href={`#`} >{item.title}</Link>
+                            <Link onClick={Toastify} className={Styles.link} key={item.title} href={`#`} >{item.title}</Link>
                         }
-                    </>
+                    </div>
+
+
                 )
             })}
         </div>
