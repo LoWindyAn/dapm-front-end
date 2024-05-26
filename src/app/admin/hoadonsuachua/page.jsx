@@ -22,10 +22,10 @@ const DSHoadon = () => {
     const [displayUpdate, setDisplayUpdate] = useState(false)
     const [isUpdate, setIsUpdate] = useState(false)
     const [manufactures, setManufactures] = useState(null)
-    const [manufacture, setManufacture] = useState('')
     const [khachhang, setKhachhang] = useState([])
     const [hoadon, setHoadon] = useState({})
     const [dichvu, setDichvu] = useState([])
+    const [linhkien, setLinhkien] = useState([])
 
     const fetchProducts = async (search) => {
         if (!search) { search = '' }
@@ -43,10 +43,16 @@ const DSHoadon = () => {
         setDichvu(dv.data)
     }
 
+    const fetchLinhkien = async () => {
+        const dv = await axios.get(`http://localhost:3500/products`)
+        setLinhkien(dv.data)
+    }
+
     useEffect(() => {
         fetchProducts()
         fetchKhachhang()
         fetchDichVu()
+        fetchLinhkien()
     }, [])
 
     useEffect(() => {
@@ -54,11 +60,6 @@ const DSHoadon = () => {
         setIsSubmit(false)
     }, [isSubmit])
 
-    useEffect(() => {
-        if (displayUpdate && display) {
-            setDisplayUpdate(false)
-        }
-    }, [display])
 
     const handleChanglePage = (e) => {
         const params = new URLSearchParams(searchParams.toString())
@@ -134,13 +135,11 @@ const DSHoadon = () => {
     };
 
     const handleDeleteOne = async (item) => {
-        const ItemDL = [item.MaNCC]
-
+        const MaHD = item.MaHD
         try {
             const response = await axios.delete('http://localhost:3500/bill/repair', {
-                data: { productIds: ItemDL }
+                data: { MaHD: MaHD }
             });
-            console.log(response);
         } catch (error) {
             console.error('Error deleting products:', error.response ? error.response.data : error.message);
         }
@@ -165,6 +164,10 @@ const DSHoadon = () => {
             setDisplayUpdate(true)
         }
     }, [hoadon])
+
+    useEffect(() => {
+        setDisplayUpdate(false)
+    }, [])
 
     const handleDisplayUpdate = (item) => {
         setHoadon(item)
@@ -195,10 +198,12 @@ const DSHoadon = () => {
                             {/* <td style={{ width: "30px" }}><input type="checkbox" /></td> */}
                             <td style={{ width: "40px" }}>STT</td>
                             <td style={{ width: "120px" }}>Mã hóa đơn</td>
-                            <td style={{ width: "300px" }}>Tên khách hàng</td>
-                            <td style={{ width: "200px" }}>Số điện thoại</td>
-                            <td style={{ width: "300px" }}>Ngày tạo</td>
+                            <td style={{ width: "200px" }}>Tên khách hàng</td>
+                            <td style={{ width: "150px" }}>Số điện thoại</td>
+                            <td style={{ width: "200px" }}>Ngày tạo</td>
+                            <td>Tiến độ sửa chữa</td>
                             <td>Trạng thái</td>
+                            <td>Tổng tiền</td>
                             <td style={{ width: "200px" }}>Hành động</td>
                         </tr>
                     </thead>
@@ -213,7 +218,9 @@ const DSHoadon = () => {
                                     <td >{item.TenKH}</td>
                                     <td>{item.SDT}</td>
                                     <td>{item.NgayTao}</td>
+                                    <td>{item.TienDoHD == 0 ? (<span>Đợi sửa</span>) : item.TienDoHD == 1 ? (<span>Đang sửa</span>) : (<span>Đã xong</span>)}</td>
                                     <td>{item.TrangThaiHD == 0 ? (<span>Chưa thanh toán</span>) : (<span>Đã thanh toán</span>)}</td>
+                                    <td>{item.TongTien}</td>
                                     <td className={Styles.actionBtn}>
                                         <button className={Styles.View} onClick={() => handleView(item)}>
                                             <FaEye />
@@ -257,7 +264,7 @@ const DSHoadon = () => {
                 <div className={Styles.modalTaoHoaDon}>
                     <div className={Styles.Overlay}></div>
                     <div className={Styles.TaoHoaDon}>
-                        <CapnhatHoaDon ahoadon={hoadon} dichvu={dichvu} khachhang={khachhang} setDisplay={setDisplayUpdate} setIsSubmit={setIsSubmit} />
+                        <CapnhatHoaDon linhkien={linhkien} ahoadon={hoadon} dichvu={dichvu} khachhang={khachhang} setDisplay={setDisplayUpdate} setIsSubmit={setIsSubmit} />
                     </div>
                 </div>
             }

@@ -38,7 +38,7 @@ const TaoHoaDon = (props) => {
                 </div>
                 <div>
                     <label htmlFor="">Khách hàng</label>
-                    <select id="" name='MaKH' onChange={handleOnChange}>
+                    <select id="" name='MaKH' value={hoadon.MaKH} onChange={handleOnChange}>
                         {
                             khachhang && khachhang.map((item, index) => (
                                 <option key={index} value={item.MaKH}>{item.MaKH} - {item.TenKH} - {item.SDT}</option>
