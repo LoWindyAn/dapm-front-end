@@ -49,9 +49,9 @@ const menu = [
         type: true
     },
     {
-        title: "BÁO CÁO THỐNG KÊ",
+        title: "BÁO CÁO",
         url: "/report",
-        type: false
+        type: true
     }
 ]
 
