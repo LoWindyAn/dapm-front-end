@@ -3,35 +3,40 @@ import Link from 'next/link'
 import Styles from './sidebar.module.css'
 import { usePathname } from 'next/navigation'
 import { ToastContainer, toast } from 'react-toastify'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 
 const menu = [
     {
         title: "TÀI KHOẢN",
         url: "/accounts",
-        type: false
+        type: false,
+        role: ['admin']
     },
     {
         title: "NHÀ CUNG CẤP",
         url: "/manufacturer",
-        type: true
+        type: true,
+        role: ['admin']
     },
     {
         title: "LINH KIỆN ĐIỆN TỬ",
         url: "/products",
-        type: true
+        type: true,
+        role: ['admin']
     },
     {
         title: "DỊCH VỤ SỬA CHỮA",
         url: "/repair",
-        type: true
+        type: true,
+        role: ['admin']
     },
 
     {
         title: "KHÁCH HÀNG",
         url: "/customer",
-        type: true
+        type: true,
+        role: ['admin']
     },
     // {
     //     title: "YÊU CẦU",
@@ -41,17 +46,20 @@ const menu = [
     {
         title: "HÓA ĐƠN SỬA CHỮA",
         url: "/hoadonsuachua",
-        type: true
+        type: true,
+        role: ['admin', 'ktv', 'sale']
     },
     {
         title: "HÓA ĐƠN LẮP ĐẶT",
         url: "/hoadonlapdat",
-        type: true
+        type: true,
+        role: ['admin', 'ktv', 'sale']
     },
     {
-        title: "BÁO CÁO",
+        title: "THỐNG KÊ",
         url: "/report",
-        type: true
+        type: true,
+        role: ['admin']
     }
 ]
 
@@ -59,6 +67,11 @@ const SideBar = () => {
     const [loading, setLoading] = useState(false);
     const pathname = usePathname().split('/');
     const endpath = "/" + pathname[2];
+    const [user, setUser] = useState({
+        HoVaTen: '',
+        VaiTro: '',
+        Avatar: 'https://static.thenounproject.com/png/363640-200.png'
+    })
 
     const Toastify = () => {
         toast.info('Chức năng đang phát triển!', {
@@ -74,21 +87,37 @@ const SideBar = () => {
         toast()
     }
 
+    useEffect(() => {
+        const getUser = () => {
+            return JSON.parse(localStorage.getItem('user'));
+        }
+        const userr = getUser()
+
+        if (userr) {
+            setUser(userr)
+        } else {
+            router.push('/login')
+        }
+    }, []);
+
+
     return (
         <div className={Styles.container}>
             <ToastContainer />
             {menu.map(item => {
-                return (
-                    <div key={item.title} className={endpath == item.url ? `${Styles.listLink} ${Styles.active}` : Styles.listLink}>
-                        {item.type ?
-                            <Link key={item.title} className={endpath == item.url ? `${Styles.link} ${Styles.active}` : Styles.link} href={`/admin${item.url}`} >{item.title}</Link>
-                            :
-                            <Link onClick={Toastify} className={Styles.link} key={item.title} href={`#`} >{item.title}</Link>
-                        }
-                    </div>
-
-
-                )
+                // Kiểm tra vai trò của người dùng trước khi hiển thị mục menu
+                if (item.role.includes(user.VaiTro)) {
+                    return (
+                        <div key={item.title} className={endpath == item.url ? `${Styles.listLink} ${Styles.active}` : Styles.listLink}>
+                            {item.type ?
+                                <Link key={item.title} className={endpath == item.url ? `${Styles.link} ${Styles.active}` : Styles.link} href={`/admin${item.url}`} >{item.title}</Link>
+                                :
+                                <Link onClick={Toastify} className={Styles.link} key={item.title} href={`#`} >{item.title}</Link>
+                            }
+                        </div>
+                    )
+                }
+                return null;
             })}
         </div>
     )

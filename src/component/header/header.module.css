@@ -18,6 +18,8 @@
     align-items: center;
     /* flex: 1; */
     width: 200px;
+    cursor: pointer;
+
 }
 
 .image {
@@ -42,6 +44,36 @@
     font-size: 16px;
 }
 
+.menu {
+    position: fixed;
+    opacity: 0;
+    display: none;
+    background: white;
+    width: 150px;
+    border-radius: 4px;
+    top: 40px;
+    box-shadow: 0px 1px 8px 2px rgb(93, 93, 93);
+    transition: ease-in-out 200ms;
+}
+
+.active {
+    display: block;
+    opacity: 1;
+}
+
+.menu li {
+    height: 24px;
+    font-size: 16px;
+    border-top: 1px solid gray;
+    cursor: pointer;
+    padding: 8px 0 4px 0;
+}
+
+.menu li:hover {
+    background: black;
+    color: white;
+}
+
 .header_right {
     background-color: var(--color1);
     height: 100%;
@@ -55,4 +87,6 @@
 .header_right p {
     color: white;
     font-weight: bold;
+    cursor: pointer;
+
 }
