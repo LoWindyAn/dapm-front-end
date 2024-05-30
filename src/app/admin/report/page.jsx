@@ -40,12 +40,44 @@ const Report = () => {
         });
     };
 
+    const handleDate = () => {
+        const date = new Date();
+        const options = {
+            timeZone: 'Asia/Ho_Chi_Minh',
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        };
+        const vietnamTime = new Intl.DateTimeFormat('vi-VN', options).format(date);
+        return vietnamTime;
+    }
+    const [datetime, setDatetime] = useState('')
+
+    useEffect(() => {
+        setTimeout(() => {
+            setDatetime(handleDate)
+        }, 1000)
+    }, [datetime])
+
+
     return (
         <div className={Styles.BoxOut}>
             <div className={Styles.xuatpdf}>
                 <button onClick={exportToPdf}><FaFileExport /> Xuất PDF</button>
             </div>
             <div className={Styles.container} ref={pdfRef}>
+                <div className={Styles.company}>
+                    <div>
+                        <p>DANACOMPANY</p>
+                        <p>QUẢN LÝ SỬA CHỮA VÀ LẮP ĐẶT LINH KIỆN ĐIỆN – ĐIỆN TỬ</p>
+                    </div>
+                    <div>
+                        <p>{datetime}</p>
+                    </div>
+                </div>
                 <div className={Styles.title}>
                     <p >Báo cáo thống kê</p>
                 </div>

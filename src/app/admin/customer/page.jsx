@@ -235,9 +235,9 @@ const Customer = () => {
                                     <td>{item.Email}</td>
                                     <td>{item.DiaChi}</td>
                                     <td className={Styles.actionBtn}>
-                                        <button className={Styles.View} onClick={() => handleView(item)}>
+                                        {/* <button className={Styles.View} onClick={() => handleView(item)}>
                                             <FaEye />
-                                        </button>
+                                        </button> */}
                                         <button className={Styles.Edit} onClick={() => handleUpdate(item)}>
                                             <FaEdit />
                                         </button>

@@ -1,13 +1,15 @@
 // components/RevenueChart.js
 import { useState } from 'react';
-import { Bar } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
+import { Bar, Pie } from 'react-chartjs-2';
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
+import Styles from './chart.module.css'
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ChartDataLabels);
+ChartJS.register(CategoryScale, LinearScale, BarElement, ArcElement, Title, Tooltip, Legend, ChartDataLabels);
 
 const RevenueChart = ({ data }) => {
-    const [showDataLabels, setShowDataLabels] = useState(false);
+    const [showDataLabels, setShowDataLabels] = useState(true);
+    const [selectedMonth, setSelectedMonth] = useState('');
 
     const lapdatData = {};
     const suachuaData = {};
@@ -36,6 +38,7 @@ const RevenueChart = ({ data }) => {
         tongthuData[label] = parseFloat(item.DoanhThu);
     });
 
+    // Convert labels set to an array and sort it
     const sortedLabels = Array.from(labels).sort((a, b) => {
         const [monthA, yearA] = a.split('/').map(Number);
         const [monthB, yearB] = b.split('/').map(Number);
@@ -93,12 +96,72 @@ const RevenueChart = ({ data }) => {
         setShowDataLabels(prevShowDataLabels => !prevShowDataLabels);
     };
 
+    const handleMonthChange = (event) => {
+        setSelectedMonth(event.target.value);
+    };
+
+    const lapdatRevenueForSelectedMonth = selectedMonth ? lapdatData[selectedMonth] || 0 : 0;
+    const suachuaRevenueForSelectedMonth = selectedMonth ? suachuaData[selectedMonth] || 0 : 0;
+
+    const pieData = {
+        labels: ['Lắp đặt', 'Sửa chữa'],
+        datasets: [
+            {
+                data: [lapdatRevenueForSelectedMonth, suachuaRevenueForSelectedMonth],
+                backgroundColor: ['rgb(83, 255, 255)', 'rgb(255, 83, 83)'],
+                hoverBackgroundColor: ['rgb(83, 255, 255, 0.8)', 'rgb(255, 83, 83, 0.8)'],
+            }
+        ],
+    };
+
+    const pieOptions = {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'bottom',
+            },
+            title: {
+                display: true,
+                text: `Tỷ lệ doanh thu cho tháng ${selectedMonth}`,
+            },
+            datalabels: {
+                formatter: (value, context) => {
+                    const total = context.dataset.data.reduce((acc, val) => acc + val, 0);
+                    const percentage = ((value / total) * 100).toFixed(2) + '%';
+                    return percentage;
+                },
+                color: 'black',
+                font: {
+                    weight: 'bold'
+                }
+            }
+        },
+    };
+
     return (
-        <div>
-            <button style={{ width: '80px', cursor: 'pointer' }} onClick={toggleDataLabels}>
-                {showDataLabels ? 'Ẩn ' : 'Hiện '}
-            </button>
-            <Bar data={chartData} options={options} />
+        <div className={Styles.container}>
+            <div className={Styles.pieChart}>
+                <div>
+                    <label htmlFor="month-select">Chọn tháng:</label>
+                    <select id="month-select" value={selectedMonth} onChange={handleMonthChange}>
+                        <option value="">--Chọn tháng--</option>
+                        {sortedLabels.map((label) => (
+                            <option key={label} value={label}>
+                                {label}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+                {selectedMonth && <Pie data={pieData} options={pieOptions} />}
+            </div>
+            <div className={Styles.barchart}>
+                <button onClick={toggleDataLabels}>
+                    {showDataLabels ? 'Ẩn số doanh thu' : 'Hiện số doanh thu'}
+                </button>
+                <Bar data={chartData} options={options} />
+
+            </div>
+
         </div>
     );
 };
