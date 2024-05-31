@@ -51,6 +51,10 @@ const TaoHoaDon = (props) => {
         })
     };
 
+    // useEffect(() => {
+    //     const newlkien = linhkien.filter(item => !dslinhkien.some(dslk => dslk.MaSP == item.MaSP))
+    //     setLkien(newlkien)
+    // }, [dslinhkien])
 
     const moreLinhkien = () => {
         setDsLinhkien(
@@ -60,6 +64,8 @@ const TaoHoaDon = (props) => {
                 SoLuong: 1
             }]
         )
+
+
     }
 
     const changeLinhKien = (e, Ma) => {

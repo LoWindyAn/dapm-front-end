@@ -42,7 +42,7 @@ const Header = () => {
             <div className={Styles.header_left} onClick={openMenu}>
                 {user && <>
                     <Image className={Styles.image}
-                        src={user.Avatar}
+                        src='https://static.thenounproject.com/png/363640-200.png'
                         alt='' width={50} height={50} />
                     <div className={Styles.inforStaff}>
                         <p>{user.HoVaTen}</p>

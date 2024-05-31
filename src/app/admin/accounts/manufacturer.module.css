@@ -1,0 +1,261 @@
+.container {
+    padding: 20px;
+    overflow-y: scroll;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--color1);
+}
+
+.actionbar {
+    display: flex;
+    gap: 40px;
+    margin: 20px 0;
+    align-items: center;
+}
+
+.dropdown {
+    width: 130px;
+    height: 34px;
+    border-radius: 5px;
+    border-color: var(--color3);
+    box-shadow: 0px 0px 10px var(--color3);
+    font-weight: bold;
+    padding: 5px;
+    border-color: var(--color3);
+    cursor: pointer;
+    outline: none;
+}
+
+
+.BoxSearch {
+    display: flex;
+    align-items: center;
+}
+
+.inputSearch {
+    height: 32px;
+    width: 300px;
+    border-radius: 5px 0 0 5px;
+    border: none;
+    padding-left: 20px;
+    box-shadow: 0px 0px 10px var(--color3);
+    outline: none;
+}
+
+.btnSearch {
+    border-radius: 0 5px 5px 0;
+    background-color: var(--color2);
+    color: white;
+    padding: 7px;
+}
+
+.btnSearch:hover {
+    cursor: pointer;
+    color: rgb(252, 159, 159);
+}
+
+.btnAdd {
+    width: 150px;
+    height: 36px;
+    border-radius: 5px;
+    background-color: var(--color2);
+    color: white;
+    padding: 7px;
+    border: none;
+    font-weight: bold;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btnAddShow {
+    display: flex;
+}
+
+.btnDelete {
+    width: 150px;
+    height: 36px;
+    border-radius: 5px;
+    background-color: var(--color2);
+    color: white;
+    padding: 7px;
+    border: none;
+    font-weight: bold;
+
+}
+
+.btnAdd:hover {
+    cursor: pointer;
+    background-color: var(--color1);
+}
+
+.btnDelete {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    border: 1px solid red;
+    background-color: white;
+    color: red;
+}
+
+.btnDelete:hover {
+    cursor: pointer;
+    background-color: red;
+    color: white;
+}
+
+.addManufacture {
+    height: 380px;
+    display: none;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+.updateManufacture {
+    height: 380px;
+    display: none;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+.show {
+    display: block;
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.aroundTable {
+    margin-top: 20px;
+    height: 400px;
+}
+
+.aroundTable>p {
+    font-weight: bold;
+    margin: 40px 0 10px 0;
+    font-size: 16px;
+}
+
+.table {
+    width: 100%;
+}
+
+.table tr,
+.table td {
+    border: 1px solid var(--color3);
+}
+
+.table thead td {
+    background-color: var(--color2);
+    color: white;
+    text-align: center;
+    height: 32px;
+    padding-top: 10px;
+    font-weight: bold;
+}
+
+.table tbody tr:hover {
+    background: rgb(236, 236, 236);
+}
+
+.table tbody td {
+    text-align: center;
+    font-size: 12px;
+    vertical-align: middle;
+    padding: 4px;
+}
+
+.actionBtn button {
+    width: 50px;
+    margin: 4px;
+    height: 30px;
+    cursor: pointer;
+    background-color: white;
+    border-radius: 4px;
+}
+
+.Edit {
+    border: 2px solid rgb(8, 225, 22);
+    color: rgb(8, 225, 22);
+}
+
+.Edit:hover {
+    background-color: rgb(8, 225, 22);
+    color: white;
+}
+
+.Delete {
+    border: 2px solid rgb(225, 8, 8);
+    color: rgb(225, 8, 8);
+}
+
+.Delete:hover {
+    background-color: rgb(225, 8, 8);
+    color: rgb(255, 255, 255);
+}
+
+
+.pagination {
+    margin-top: 40px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.pagination button {
+    width: 50px;
+    height: 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    font-weight: bold;
+    font-size: 20px;
+    background-color: white;
+}
+
+.pagination button:hover {
+    background-color: var(--color3);
+}
+
+.pagination ul {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.pagination ul li {
+    cursor: pointer;
+    color: black;
+    width: 30px;
+    height: 20px;
+    padding: 5px;
+    border-radius: 5px;
+    text-align: center;
+
+}
+
+.pagination ul li:hover {
+    background-color: bisque;
+}
+
+.active {
+    background-color: var(--color2);
+    font-weight: bold;
+    color: white !important;
+}
+
+
+
+
+
+
+/*******************************************************************/

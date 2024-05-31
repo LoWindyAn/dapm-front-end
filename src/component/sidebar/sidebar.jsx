@@ -10,26 +10,26 @@ const menu = [
     {
         title: "TÀI KHOẢN",
         url: "/accounts",
-        type: false,
+        type: true,
         role: ['admin']
     },
     {
         title: "NHÀ CUNG CẤP",
         url: "/manufacturer",
         type: true,
-        role: ['admin']
+        role: ['admin', 'nvk']
     },
     {
         title: "LINH KIỆN ĐIỆN TỬ",
         url: "/products",
         type: true,
-        role: ['admin']
+        role: ['admin', 'nvk']
     },
     {
         title: "DỊCH VỤ SỬA CHỮA",
         url: "/repair",
         type: true,
-        role: ['admin']
+        role: ['admin', 'ktv']
     },
 
     {
