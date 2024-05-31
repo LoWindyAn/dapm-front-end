@@ -172,24 +172,6 @@ const XemHoaDon = (props) => {
                                             </td>
                                         </tr>
                                     ))}
-                                    {
-                                        <tr>
-                                            <td style={{ width: '40px' }}>{dslinhkien.length + 1}</td>
-                                            <td style={{ width: '500px' }}>
-                                                {dichvu.find(item => item.MaSuaChua == hoadon.MaSuaChua) && dichvu.find(item => item.MaSuaChua == hoadon.MaSuaChua).TenSC}
-                                            </td>
-                                            <td style={{ width: '100px' }}>
-                                                {dichvu.find(item => item.MaSuaChua == hoadon.MaSuaChua) && dichvu.find(item => item.MaSuaChua == hoadon.MaSuaChua).MaSuaChua}
-                                            </td>
-                                            <td > 1 </td>
-                                            <td >
-                                                {dichvu.find(item => item.MaSuaChua == hoadon.MaSuaChua) && dichvu.find(item => item.MaSuaChua == hoadon.MaSuaChua).PhiSua}
-                                            </td>
-                                            <td >
-                                                {dichvu.find(item => item.MaSuaChua == hoadon.MaSuaChua) && dichvu.find(item => item.MaSuaChua == hoadon.MaSuaChua).PhiSua}
-                                            </td>
-                                        </tr>
-                                    }
 
                                     <tr className={Styles.total}>
                                         <td colSpan={5} style={{ textAlign: 'end', paddingRight: '24px' }}>Cộng tiền hàng hóa, dịch vụ:</td>

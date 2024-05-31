@@ -36,7 +36,7 @@ const menu = [
         title: "KHÁCH HÀNG",
         url: "/customer",
         type: true,
-        role: ['admin', 'ktv', 'sale']
+        role: ['admin']
     },
     // {
     //     title: "YÊU CẦU",

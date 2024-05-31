@@ -9,7 +9,7 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import TaoHoaDon from '@/component/hoadon/lapdat/TaoHoaDon';
 import CapnhatHoaDon from '@/component/hoadon/lapdat/CapnhatHoaDon';
-import XemHoaDon from '@/component/hoadon/lapdat/xemHoaDon';
+import XemHoaDon from '@/component/hoadon/lapdat/xemHoaDon2';
 
 const HOADONLD = () => {
     const searchParams = useSearchParams();
@@ -30,6 +30,18 @@ const HOADONLD = () => {
     const [displayView, setDisplayView] = useState(false)
     const [viewHoadon, setViewHoaDon] = useState({})
     const [isView, setIsView] = useState(false)
+    const [user, setUser] = useState({})
+
+    useEffect(() => {
+        const getUser = () => {
+            return JSON.parse(localStorage.getItem('user'));
+        }
+        const userr = getUser()
+
+        if (userr) {
+            setUser(userr)
+        }
+    }, []);
 
     const fetchProducts = async (search) => {
         if (!search) { search = '' }
@@ -51,6 +63,14 @@ const HOADONLD = () => {
         const dv = await axios.get(`http://localhost:3500/products`)
         setLinhkien(dv.data)
     }
+
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            fetchProducts()
+        }, 7000);
+
+        return () => clearInterval(intervalId);
+    }, []);
 
     useEffect(() => {
         fetchProducts()
@@ -207,7 +227,10 @@ const HOADONLD = () => {
                     <input onChange={handleSearch} type="text" placeholder='Tìm kiếm' className={Styles.inputSearch} />
                     <FaSearch className={Styles.btnSearch} size={20} />
                 </div>
-                <button className={`${Styles.btnAdd} ${display ? Styles.btnAddShow : ''}`} onClick={handleClickAdd}><FaPlus />Tạo hóa đơn </button>
+                {
+                    user && user.VaiTro != 'ktv' &&
+                    <button className={`${Styles.btnAdd} ${display ? Styles.btnAddShow : ''}`} onClick={handleClickAdd}><FaPlus />Tạo hóa đơn </button>
+                }
             </div>
 
             <div className={Styles.aroundTable}>
@@ -221,7 +244,7 @@ const HOADONLD = () => {
                             <td style={{ width: "200px" }}>Tên khách hàng</td>
                             <td style={{ width: "150px" }}>Số điện thoại</td>
                             <td style={{ width: "200px" }}>Ngày tạo</td>
-                            <td>Tiến độ sửa chữa</td>
+                            <td>Tiến độ lắp đặt</td>
                             <td>Trạng thái</td>
                             <td>Tổng tiền</td>
                             <td style={{ width: "200px" }}>Hành động</td>
@@ -242,9 +265,12 @@ const HOADONLD = () => {
                                     <td>{item.TrangThaiHD == 0 ? (<span>Chưa thanh toán</span>) : (<span>Đã thanh toán</span>)}</td>
                                     <td>{item.TongTien}</td>
                                     <td className={Styles.actionBtn}>
-                                        <button className={Styles.View} onClick={() => handleView(item)}>
-                                            <FaEye />
-                                        </button>
+                                        {
+                                            user && user.VaiTro != 'ktv' &&
+                                            <button className={Styles.View} onClick={() => handleView(item)}>
+                                                <FaEye />
+                                            </button>
+                                        }
                                         <button className={Styles.Edit} onClick={() => handleDisplayUpdate(item)}>
                                             <FaEdit />
                                         </button>

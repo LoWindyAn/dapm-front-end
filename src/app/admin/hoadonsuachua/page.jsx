@@ -319,7 +319,7 @@ const DSHoadon = () => {
                 <div className={Styles.modalTaoHoaDon}>
                     <div className={Styles.Overlay}></div>
                     <div className={Styles.TaoHoaDon}>
-                        <XemHoaDon linhkien={linhkien} ahoadon={viewHoadon} dichvu={dichvu} khachhang={khachhang} setDisplay={setDisplayView} setIsSubmit={setIsSubmit} />
+                        <XemHoaDon user={user} linhkien={linhkien} ahoadon={viewHoadon} dichvu={dichvu} khachhang={khachhang} setDisplay={setDisplayView} setIsSubmit={setIsSubmit} />
                     </div>
                 </div>
             }

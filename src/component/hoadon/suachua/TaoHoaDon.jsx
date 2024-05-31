@@ -61,6 +61,7 @@ const TaoHoaDon = (props) => {
             </div>
             <div className={Styles.information}>
                 <div className={Styles.inforKH}>
+                    <p style={{ marginBottom: "8px", fontWeight: '600' }}>Thông tin khách hàng:</p>
                     <div className={Styles.sdt}>
                         <label htmlFor="">Số điện thoại</label>
                         <input name='SDT' value={hoadon.SDT} type="text" onChange={handleChangeSDT} autocomplete="off" />
@@ -90,6 +91,7 @@ const TaoHoaDon = (props) => {
                     </div>
                 </div>
                 <div className={Styles.inforHD}>
+                    <p style={{ marginBottom: "8px", fontWeight: '600' }}>Thông tin sửa chữa:</p>
                     <div>
                         <label htmlFor="">Mã hóa đơn</label>
                         <input name='MaHD' value={hoadon.MaHD} type="text" onChange={handleOnChange} />

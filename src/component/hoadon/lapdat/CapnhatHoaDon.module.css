@@ -102,6 +102,27 @@
     margin-top: 24px;
 }
 
+.BoxTrangthai {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    gap: 4px;
+}
+
+.SubBoxTrangthai {
+    display: flex;
+    width: 300px;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.SubBoxTrangthai input {
+    width: 40px !important;
+}
+
+.SubBoxTrangthai>p {
+    width: 300px;
+}
 
 
 .information label {
@@ -140,6 +161,21 @@
     background-color: var(--color2);
     color: white;
     font-weight: 500;
+}
+
+.linhkienthay table {
+    position: relative;
+}
+
+.disabled {
+    position: absolute;
+    background: black;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.2;
 }
 
 .btn {

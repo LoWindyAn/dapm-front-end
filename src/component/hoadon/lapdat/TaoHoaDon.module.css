@@ -1,10 +1,10 @@
 .container {
-    width: 500px;
-    height: fit-content;
+    /* width: 500px; */
+    /* height: fit-content; */
     background: white;
     border-radius: 8px;
-    display: flex;
     flex-direction: column;
+    display: flex;
     /* align-items: center; */
     padding: 20px;
 }
@@ -23,15 +23,17 @@
 
 .information {
     display: flex;
-    flex-direction: column;
-    gap: 20px;
+    gap: 40px;
     padding: 24px;
+    align-items: center;
+    /* flex-direction: column; */
+    justify-content: center;
 }
 
 .information label {
     margin-right: 8px;
     display: inline-block;
-    width: 100px;
+    width: 130px;
     font-weight: 500;
 }
 
@@ -48,6 +50,50 @@
     border-radius: 4px;
     border-color: rgb(226, 226, 226);
     border: 1px solid;
+}
+
+.inforKH {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    height: 200px;
+    margin-bottom: 12px;
+}
+
+.inforKH .sdt {
+    position: relative;
+}
+
+.listKH {
+    position: absolute;
+    width: 300px;
+    background: rgb(234, 234, 234);
+    max-height: 80px;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    left: 180px;
+    top: 110px;
+    border-radius: 4px;
+    box-shadow: 2px 2px 8px 2px rgb(177, 177, 177);
+}
+
+.listKH li {
+    height: 20px;
+    align-content: center;
+    padding-left: 8px;
+}
+
+.listKH li:hover {
+    cursor: pointer;
+    background: gray;
+}
+
+.inforHD {
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    justify-content: flex-start;
 }
 
 .btn {

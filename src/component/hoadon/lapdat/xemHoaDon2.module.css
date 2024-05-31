@@ -1,0 +1,225 @@
+.abc {
+    /* opacity: 20%; */
+    height: 500px;
+}
+
+.container {
+    width: 900px;
+    height: 1250px;
+    background: white;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    padding: 40px 20px;
+    border: 4px solid #000;
+    border-style: double;
+    border-width: 8px;
+}
+
+
+.headerHD {
+    display: flex;
+    justify-content: space-between;
+}
+
+.titleHD {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.rightTitle {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.inforCompany {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 24px;
+    padding: 12px;
+    border-top: 2px solid gray;
+}
+
+.BoxInforKH {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 2px solid gray;
+
+}
+
+.informationKH {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 12px;
+    padding: 12px;
+}
+
+.title {
+    height: 52px;
+    font-size: 24px;
+    font-family: sans-serif;
+    border-bottom: 1px solid var(--color1);
+    width: 624px;
+    display: flex;
+    justify-content: space-between;
+    background: var(--colorb);
+    align-items: center;
+    margin: 0 12px;
+    color: white;
+
+}
+
+.title>p {
+    font-weight: bold;
+    font-size: 28px;
+    margin-left: 12px;
+}
+
+.mahd>p {
+    font-size: 16px;
+    font-style: italic;
+    margin-right: 12px;
+}
+
+
+
+.inforSC {
+    display: flex;
+    gap: 20px;
+}
+
+.inforLeft {
+    width: 400px;
+}
+
+.titlel {
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--color1);
+}
+
+.titlel>p {
+    color: var(--color1);
+    font-weight: 600;
+}
+
+.bottomtitle {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 12px;
+}
+
+.bottomtitle>p {
+    /* display: block; */
+    /* margin-top: 20px; */
+}
+
+.information label {
+    margin-right: 8px;
+    display: inline-block;
+    width: 100px;
+    font-weight: 500;
+}
+
+.information input {
+    width: 300px;
+    height: 24px;
+    border-radius: 4px;
+    border-color: rgb(226, 226, 226);
+}
+
+.information select {
+    width: 308px;
+    height: 32px;
+    border-radius: 4px;
+    border-color: rgb(226, 226, 226);
+    border: 1px solid;
+}
+
+.linhkienthay {
+    /* padding: 12px; */
+    padding-top: 12px;
+}
+
+.linhkienthay .header th,
+.linhkienthay tbody td {
+    width: 200px;
+    border: 1px solid black;
+    height: 40px;
+    text-align: center;
+    align-content: center;
+}
+
+.linhkienthay .header th {
+    /* background-color: var(--colora); */
+    font-weight: 600;
+}
+
+.total {
+    /* background: var(--colora); */
+}
+
+.total>td {
+    font-weight: 600;
+}
+
+.signature {
+    padding: 24px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.signature div {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+}
+
+.btn {
+    border-top: 1px solid #000;
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    padding: 24px;
+    background: white;
+}
+
+.btn button {
+    width: 100px;
+    height: 40px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+}
+
+.btnAdd {
+    background: white;
+    border-color: var(--color2);
+    color: var(--color2);
+}
+
+.btnAdd:hover {
+    background-color: var(--color2);
+    color: white;
+}
+
+.btnCancel {
+    background: white;
+    border-color: #dbdb00;
+    color: #dbdb00;
+}
+
+.btnCancel:hover {
+    background-color: #dbdb00;
+    color: white;
+}
