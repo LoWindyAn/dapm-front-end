@@ -36,7 +36,7 @@ const menu = [
         title: "KHÁCH HÀNG",
         url: "/customer",
         type: true,
-        role: ['admin']
+        role: ['admin', 'ktv', 'sale']
     },
     // {
     //     title: "YÊU CẦU",
@@ -95,8 +95,6 @@ const SideBar = () => {
 
         if (userr) {
             setUser(userr)
-        } else {
-            router.push('/login')
         }
     }, []);
 
@@ -108,7 +106,7 @@ const SideBar = () => {
                 // Kiểm tra vai trò của người dùng trước khi hiển thị mục menu
                 if (item.role.includes(user.VaiTro)) {
                     return (
-                        <div key={item.title} className={endpath == item.url ? `${Styles.listLink} ${Styles.active}` : Styles.listLink}>
+                        <div key={item.title} className={endpath == item.url ? `${Styles.listLink}` : Styles.listLink}>
                             {item.type ?
                                 <Link key={item.title} className={endpath == item.url ? `${Styles.link} ${Styles.active}` : Styles.link} href={`/admin${item.url}`} >{item.title}</Link>
                                 :

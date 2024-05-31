@@ -46,7 +46,7 @@ const Header = () => {
                         alt='' width={50} height={50} />
                     <div className={Styles.inforStaff}>
                         <p>{user.HoVaTen}</p>
-                        <p>{user.VaiTro}</p>
+                        <p>{user.VaiTro == 'admin' ? 'Admin' : user.VaiTro == 'ktv' ? 'Kỹ thuật viên' : 'Nhân viên seller'}</p>
                     </div>
                 </>}
                 <ul className={isMenu ? `${Styles.menu} ${Styles.active}` : `${Styles.menu}`}>

@@ -9,7 +9,7 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import TaoHoaDon from '@/component/hoadon/suachua/TaoHoaDon';
 import CapnhatHoaDon from '@/component/hoadon/suachua/CapnhatHoaDon';
-import XemHoaDon from '@/component/hoadon/suachua/xemHoaDon';
+import XemHoaDon from '@/component/hoadon/suachua/xemHoaDon2';
 
 const DSHoadon = () => {
     const searchParams = useSearchParams();
@@ -30,6 +30,18 @@ const DSHoadon = () => {
     const [displayView, setDisplayView] = useState(false)
     const [viewHoadon, setViewHoaDon] = useState({})
     const [isView, setIsView] = useState(false)
+    const [user, setUser] = useState({})
+
+    useEffect(() => {
+        const getUser = () => {
+            return JSON.parse(localStorage.getItem('user'));
+        }
+        const userr = getUser()
+
+        if (userr) {
+            setUser(userr)
+        }
+    }, []);
 
     const fetchProducts = async (search) => {
         if (!search) { search = '' }
@@ -188,6 +200,14 @@ const DSHoadon = () => {
         setDisplayView(false)
     }, [])
 
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            fetchProducts()
+        }, 7000);
+
+        return () => clearInterval(intervalId);
+    }, []);
+
     const handleView = (item) => {
         setViewHoaDon(item)
         setIsView(!isView)
@@ -207,7 +227,10 @@ const DSHoadon = () => {
                     <input onChange={handleSearch} type="text" placeholder='Tìm kiếm' className={Styles.inputSearch} />
                     <FaSearch className={Styles.btnSearch} size={20} />
                 </div>
-                <button className={`${Styles.btnAdd} ${display ? Styles.btnAddShow : ''}`} onClick={handleClickAdd}><FaPlus />Tạo hóa đơn </button>
+                {
+                    user && user.VaiTro != 'ktv' &&
+                    <button className={`${Styles.btnAdd} ${display ? Styles.btnAddShow : ''}`} onClick={handleClickAdd}><FaPlus />Tạo hóa đơn </button>
+                }
             </div>
 
             <div className={Styles.aroundTable}>
@@ -242,9 +265,11 @@ const DSHoadon = () => {
                                     <td>{item.TrangThaiHD == 0 ? (<span>Chưa thanh toán</span>) : (<span>Đã thanh toán</span>)}</td>
                                     <td>{item.TongTien}</td>
                                     <td className={Styles.actionBtn}>
-                                        <button className={Styles.View} onClick={() => handleView(item)}>
-                                            <FaEye />
-                                        </button>
+                                        {user && user.VaiTro != 'ktv' &&
+                                            <button className={Styles.View} onClick={() => handleView(item)}>
+                                                <FaEye />
+                                            </button>
+                                        }
                                         <button className={Styles.Edit} onClick={() => handleDisplayUpdate(item)}>
                                             <FaEdit />
                                         </button>

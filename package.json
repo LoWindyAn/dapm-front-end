@@ -24,7 +24,8 @@
     "react-icons": "^5.1.0",
     "react-pdf": "^8.0.2",
     "react-spinners": "^0.13.8",
-    "react-toastify": "^10.0.5"
+    "react-toastify": "^10.0.5",
+    "vn-num2words": "^1.0.4"
   },
   "devDependencies": {
     "eslint": "^8",

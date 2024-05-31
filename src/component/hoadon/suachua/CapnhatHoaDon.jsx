@@ -9,6 +9,7 @@ const TaoHoaDon = (props) => {
     const [hoadon, setHoadon] = useState({})
     const [dslinhkien, setDsLinhkien] = useState([])
     const [lkien, setLkien] = useState([])
+    const [user, setUser] = useState({})
 
     useEffect(() => {
         const fetchDsLinhkien = async () => {
@@ -22,6 +23,17 @@ const TaoHoaDon = (props) => {
     useEffect(() => {
         setHoadon(ahoadon)
     }, [ahoadon])
+
+    useEffect(() => {
+        const getUser = () => {
+            return JSON.parse(localStorage.getItem('user'));
+        }
+        const userr = getUser()
+
+        if (userr) {
+            setUser(userr)
+        }
+    }, []);
 
     const handleOnChange = (e) => {
         const { name, value } = e.target
@@ -71,7 +83,7 @@ const TaoHoaDon = (props) => {
     }
 
     const handleSubmit = async () => {
-        const res = await axios.put('http://localhost:3500/bill/repair', { hoadon, dslinhkien })
+        const res = await axios.put('http://localhost:3500/bill/repair', { hoadon, dslinhkien, user })
         setIsSubmit(true)
         setDisplay(false)
     }
@@ -112,11 +124,11 @@ const TaoHoaDon = (props) => {
                         <div>
                             <p>Mô tả sửa chữa</p>
                             {/* <input name='ThietBiSua' value={hoadon.ThietBiSua} type="text" onChange={handleOnChange} /> */}
-                            <textarea name='MoTaSuaChua' value={hoadon.MoTaSuaChua} onChange={handleOnChange} rows="6"></textarea>
+                            <textarea name='MoTaSuaChua' value={hoadon.MoTaSuaChua} onChange={handleOnChange} rows="6" readOnly={user && user.VaiTro == 'sale' ? true : false}></textarea>
                         </div>
                         <div>
                             <p>Loại dịch vụ</p>
-                            <select id="" name='MaSuaChua' value={hoadon.MaSuaChua} onChange={handleOnChange}>
+                            <select id="" name='MaSuaChua' value={hoadon.MaSuaChua} onChange={handleOnChange} disabled={user && user.VaiTro == 'sale' ? true : false}>
                                 {
                                     dichvu && dichvu.map((item, index) => (
                                         <option key={index} value={item.MaSuaChua}>{item.TenSC} | {item.PhiSua}đ</option>
@@ -136,6 +148,7 @@ const TaoHoaDon = (props) => {
                                         value='0'
                                         checked={hoadon.TrangThaiHD == '0'}
                                         onChange={handleChange}
+                                        disabled={user && user.VaiTro == 'ktv' ? true : false}
                                     />
                                     <p >Chưa thanh toán</p>
                                 </div>
@@ -146,6 +159,7 @@ const TaoHoaDon = (props) => {
                                         value='1'
                                         checked={hoadon.TrangThaiHD == '1'}
                                         onChange={handleChange}
+                                        disabled={user && user.VaiTro == 'ktv' ? true : false}
                                     />
                                     <p >Đã thanh toán</p>
                                 </div>
@@ -161,6 +175,7 @@ const TaoHoaDon = (props) => {
                                         value='0'
                                         checked={hoadon.TienDoHD == '0'}
                                         onChange={handleChange}
+                                        disabled={user && user.VaiTro == 'sale' ? true : false}
                                     />
                                     <label >Đợi sửa</label>
                                 </div>
@@ -171,6 +186,7 @@ const TaoHoaDon = (props) => {
                                         value='1'
                                         checked={hoadon.TienDoHD == '1'}
                                         onChange={handleChange}
+                                        disabled={user && user.VaiTro == 'sale' ? true : false}
                                     />
                                     <label >Đang sửa</label>
                                 </div>
@@ -181,6 +197,7 @@ const TaoHoaDon = (props) => {
                                         value='2'
                                         checked={hoadon.TienDoHD == '2'}
                                         onChange={handleChange}
+                                        disabled={user && user.VaiTro == 'sale' ? true : false}
                                     />
                                     <label >Đã xong</label>
                                 </div>
@@ -218,7 +235,12 @@ const TaoHoaDon = (props) => {
                                 <td colSpan={4} style={{ height: "32px", cursor: 'pointer' }} onClick={moreLinhkien}><FaPlus /></td>
                             </tr>
                         </tbody>
+                        {user && user.VaiTro == 'sale' &&
+                            (<div className={Styles.disabled}>
+
+                            </div>)}
                     </table>
+
                 </div>
             </div>
             <div className={Styles.btn}>
