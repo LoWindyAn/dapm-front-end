@@ -4,12 +4,13 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import Styles from './hoadon.module.css'
 import { FaSearch, FaEdit, FaPlus, FaEye } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import TaoHoaDon from '@/component/hoadon/suachua/TaoHoaDon';
 import CapnhatHoaDon from '@/component/hoadon/suachua/CapnhatHoaDon';
 import XemHoaDon from '@/component/hoadon/suachua/xemHoaDon2';
+import { FaRegFaceSmileWink } from "react-icons/fa6";
 
 const DSHoadon = () => {
     const searchParams = useSearchParams();
@@ -31,6 +32,9 @@ const DSHoadon = () => {
     const [viewHoadon, setViewHoaDon] = useState({})
     const [isView, setIsView] = useState(false)
     const [user, setUser] = useState({})
+    const [trangThaiHD, setTrangThaiHD] = useState('')
+    const [TienDoHD, setTienDoHD] = useState('')
+    const [search, setSearch] = useState('')
 
     useEffect(() => {
         const getUser = () => {
@@ -43,9 +47,11 @@ const DSHoadon = () => {
         }
     }, []);
 
-    const fetchProducts = async (search) => {
-        if (!search) { search = '' }
-        const manufac = await axios.get(`http://localhost:3500/bill/repair/search?type=${typeSearch}&search=${search}`)
+    const fetchProducts = async () => {
+        const userrr = JSON.parse(localStorage.getItem('user'));
+
+        const manufac = await axios.get(`http://localhost:3500/bill/repair/search?type=${typeSearch}&search=${search}&VaiTro=${userrr.VaiTro}&MaNV=${userrr.MaTK}&TrangThaiHD=${trangThaiHD}&TienDoHD=${TienDoHD}`)
+
         setManufactures(chunkArray(manufac.data, 7))
     }
 
@@ -63,6 +69,8 @@ const DSHoadon = () => {
         const dv = await axios.get(`http://localhost:3500/products`)
         setLinhkien(dv.data)
     }
+
+
 
     useEffect(() => {
         fetchProducts()
@@ -162,12 +170,25 @@ const DSHoadon = () => {
         fetchProducts()
     }
 
+
     const handleSearch = (e) => {
-        fetchProducts(e.target.value)
+        setSearch(e.target.value)
     }
 
     const handleChangleType = (e) => {
         setTypeSearch(e.target.value)
+    }
+
+    useEffect(() => {
+        fetchProducts()
+    }, [trangThaiHD, TienDoHD, search])
+
+    const handleChangeTrangThai = (e) => {
+        setTrangThaiHD(e.target.value)
+    }
+
+    const handleChangeTienDoHD = (e) => {
+        setTienDoHD(e.target.value)
     }
 
 
@@ -199,14 +220,19 @@ const DSHoadon = () => {
     useEffect(() => {
         setDisplayView(false)
     }, [])
+    const [isLoad, setIsLoad] = useState(true)
 
     useEffect(() => {
-        const intervalId = setInterval(() => {
-            fetchProducts()
-        }, 7000);
+        // const intervalId = setInterval(() => {
+        //     fetchProducts()
+        // }, 7000);
 
-        return () => clearInterval(intervalId);
-    }, []);
+        // return () => clearInterval(intervalId);
+        setTimeout(() => {
+            setIsLoad(!isLoad)
+        }, 7000)
+        fetchProducts()
+    }, [isLoad]);
 
     const handleView = (item) => {
         setViewHoaDon(item)
@@ -227,10 +253,22 @@ const DSHoadon = () => {
                     <input onChange={handleSearch} type="text" placeholder='Tìm kiếm' className={Styles.inputSearch} />
                     <FaSearch className={Styles.btnSearch} size={20} />
                 </div>
-                {
+                {/* {
                     user && user.VaiTro != 'ktv' &&
                     <button className={`${Styles.btnAdd} ${display ? Styles.btnAddShow : ''}`} onClick={handleClickAdd}><FaPlus />Tạo hóa đơn </button>
-                }
+                } */}
+                <select className={Styles.dropdown} name="TrangThaiHD" id="" onChange={handleChangeTrangThai}>
+                    <option value="">Tất cả</option>
+                    <option value="0">Chưa thanh toán</option>
+                    <option value="1">Đã thanh toán</option>
+                </select>
+
+                <select className={Styles.dropdown} name="TienDoHD" id="" onChange={handleChangeTienDoHD}>
+                    <option value="">Tất cả</option>
+                    <option value="0">Đợi sửa</option>
+                    <option value="1">Đang sửa</option>
+                    <option value="2">Đã xong</option>
+                </select>
             </div>
 
             <div className={Styles.aroundTable}>
@@ -252,7 +290,7 @@ const DSHoadon = () => {
                     </thead>
                     <tbody>
                         {manufactures && manufactures.length > 0
-                            &&
+                            ?
                             manufactures[page - 1].map((item, index) => (
                                 <tr key={index} className={Styles.rowTable}>
                                     {/* <td style={{ width: "30px" }}><input type="checkbox" onChange={(e) => handleSelectProduct(e, item.MaSP)} /></td> */}
@@ -261,8 +299,8 @@ const DSHoadon = () => {
                                     <td >{item.TenKH}</td>
                                     <td>{item.SDT}</td>
                                     <td>{item.NgayTao}</td>
-                                    <td>{item.TienDoHD == 0 ? (<span>Đợi sửa</span>) : item.TienDoHD == 1 ? (<span>Đang sửa</span>) : (<span>Đã xong</span>)}</td>
-                                    <td>{item.TrangThaiHD == 0 ? (<span>Chưa thanh toán</span>) : (<span>Đã thanh toán</span>)}</td>
+                                    <td style={{ color: item.TienDoHD == 0 ? 'rgb(255, 153, 0)' : item.TienDoHD == 1 ? 'blue' : 'rgb(55, 255, 0)', fontWeight: '700' }}>{item.TienDoHD == 0 ? (<span>Đợi sửa</span>) : item.TienDoHD == 1 ? (<span>Đang sửa</span>) : (<span>Đã xong</span>)}</td>
+                                    <td style={{ color: item.TrangThaiHD == 0 ? 'blue' : 'rgb(55, 255, 0)', fontWeight: '700' }}>{item.TrangThaiHD == 0 ? (<span>Chưa thanh toán</span>) : (<span>Đã thanh toán</span>)}</td>
                                     <td>{item.TongTien}</td>
                                     <td className={Styles.actionBtn}>
                                         {user && user.VaiTro != 'ktv' &&
@@ -278,7 +316,11 @@ const DSHoadon = () => {
                                         </button>
                                     </td>
                                 </tr>
-                            ))
+                            )) :
+                            <tr>
+                                <td colSpan={9} style={{ height: '52px', fontSize: '20px' }}> <FaRegFaceSmileWink /> Không tìm thấy đơn</td>
+
+                            </tr>
                         }
                     </tbody>
                 </table>

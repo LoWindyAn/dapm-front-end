@@ -1,0 +1,273 @@
+.container {
+    width: 650px;
+    height: 550px;
+    background: white;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    padding: 20px 20px 0 20px;
+
+}
+
+.title {
+    height: 32px;
+    font-size: 24px;
+    font-family: sans-serif;
+    border-bottom: 1px solid var(--color1);
+    width: 100%;
+}
+
+.title p {
+    font-weight: bold;
+}
+
+.information {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 24px 12px;
+    overflow-y: scroll;
+    height: 500px;
+}
+
+.boxInforKH {
+    border: 1px solid black;
+    padding: 12px;
+    border-radius: 8px;
+
+}
+
+.boxInforKH h3 {
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.inforKH {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.inforKH th {
+    text-align: right;
+    font-weight: bold;
+    width: 150px;
+    padding-right: 16px;
+    border-right: 1px solid white;
+}
+
+.inforKH td {
+    padding-left: 12px;
+}
+
+.inforKH1 {
+    background: #a4c1ff;
+    height: 28px;
+    align-content: center;
+}
+
+.inforKH2 {
+    height: 28px;
+    align-content: center;
+}
+
+
+.inforSC {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.ContainerTrangThai {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.TrangThaiHD {
+    display: flex;
+    flex-direction: column;
+}
+
+.TrangThaiHD>p {
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.TienDoHD>p {
+    font-weight: bold;
+    margin-bottom: 12px;
+    margin-top: 24px;
+}
+
+.BoxTrangthai {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    gap: 4px;
+}
+
+.SubBoxTrangthai {
+    display: flex;
+    width: 300px;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.SubBoxTrangthai input {
+    width: 40px !important;
+}
+
+.SubBoxTrangthai>p {
+    width: 300px;
+}
+
+
+.information label {
+    margin-right: 8px;
+    display: inline-block;
+    width: 100px;
+    font-weight: 500;
+}
+
+.information input {
+    width: 300px;
+    height: 24px;
+    border-radius: 4px;
+    border-color: rgb(226, 226, 226);
+}
+
+.information select {
+    width: 308px;
+    height: 32px;
+    border-radius: 4px;
+    border-color: rgb(226, 226, 226);
+    border: 1px solid;
+}
+
+
+.linhkienthay .header th,
+.linhkienthay tbody td {
+    width: 200px;
+    border: 1px solid black;
+    height: 28px;
+    text-align: center;
+    align-content: center;
+}
+
+.linhkienthay .header th {
+    background-color: #a4c1ff;
+    color: black;
+    font-weight: 500;
+}
+
+.linhkienthay table {
+    position: relative;
+}
+
+.disabled {
+    position: absolute;
+    background: black;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+
+.tutiep {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid black;
+    margin-bottom: 12px;
+}
+
+.tutiep button {
+    width: 100px;
+    height: 32px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.tuchoi {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.tuchoi button {
+    background: white;
+    color: red;
+    border-color: red;
+}
+
+.tuchoi button:hover {
+    background: red;
+    color: white;
+    border-color: red;
+}
+
+.tuchoi textarea {
+    width: 200px;
+    height: 52px;
+}
+
+.tiepnhan button {
+    background: white;
+    color: blue;
+    border-color: blue;
+}
+
+.tiepnhan button:hover {
+    background: blue;
+    color: white;
+    border-color: blue;
+}
+
+.btn {
+    border-top: 1px solid #000;
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    padding: 24px;
+    margin-top: 12px;
+}
+
+.btn button {
+    width: 100px;
+    height: 32px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+}
+
+.btnAdd {
+    background: white;
+    border-color: var(--color2);
+    color: var(--color2);
+}
+
+.btnAdd:hover {
+    background-color: var(--color2);
+    color: white;
+}
+
+.btnCancel {
+    background: white;
+    border-color: blue;
+    color: blue;
+}
+
+.btnCancel:hover {
+    background-color: blue;
+    color: white;
+}

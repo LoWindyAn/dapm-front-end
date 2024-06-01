@@ -1,0 +1,194 @@
+.container {
+    width: 650px;
+    height: 550px;
+    background: white;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    padding: 20px;
+
+}
+
+.title {
+    height: 32px;
+    font-size: 24px;
+    font-family: sans-serif;
+    border-bottom: 1px solid var(--color1);
+    width: 100%;
+}
+
+.title p {
+    font-weight: bold;
+}
+
+.information {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 24px 12px;
+    overflow-y: scroll;
+    height: 500px;
+}
+
+.boxInforKH {
+    border: 1px solid black;
+    padding: 12px;
+    border-radius: 8px;
+
+}
+
+.boxInforKH h3 {
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.inforKH {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.inforKH th {
+    text-align: right;
+    font-weight: bold;
+    width: 150px;
+    padding-right: 16px;
+    border-right: 1px solid white;
+}
+
+.inforKH td {
+    padding-left: 12px;
+}
+
+.inforKH1 {
+    background: #a4c1ff;
+    height: 28px;
+    align-content: center;
+}
+
+.inforKH2 {
+    height: 28px;
+    align-content: center;
+}
+
+
+.inforSC {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-bottom: 1px solid var(--color2);
+    padding-bottom: 24px;
+}
+
+.inforSC h3 {
+    font-weight: bold;
+}
+
+.suachua {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 0 12px;
+}
+
+.tutiep {
+    display: flex;
+    justify-content: space-around;
+}
+
+.tutiep button {
+    width: 100px;
+    height: 32px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.tuchoi {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.tuchoi button {
+    background: white;
+    color: red;
+    border-color: red;
+}
+
+.tuchoi button:hover {
+    background: red;
+    color: white;
+    border-color: red;
+}
+
+.tuchoi textarea {
+    width: 200px;
+    height: 52px;
+}
+
+.tiepnhan button {
+    background: white;
+    color: blue;
+    border-color: blue;
+}
+
+.tiepnhan button:hover {
+    background: blue;
+    color: white;
+    border-color: blue;
+}
+
+.disabled {
+    position: absolute;
+    background: black;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.2;
+}
+
+.btn {
+    border-top: 1px solid #000;
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    padding: 24px;
+}
+
+.btn button {
+    width: 100px;
+    height: 40px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+}
+
+.btnAdd {
+    background: white;
+    border-color: var(--color2);
+    color: var(--color2);
+}
+
+.btnAdd:hover {
+    background-color: var(--color2);
+    color: white;
+}
+
+.btnCancel {
+    background: white;
+    border-color: #0016db;
+    color: #0016db;
+    font-weight: bold;
+}
+
+.btnCancel:hover {
+    background-color: #0016db;
+    color: white;
+}

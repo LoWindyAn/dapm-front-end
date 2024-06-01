@@ -38,11 +38,19 @@ const menu = [
         type: true,
         role: ['admin']
     },
-    // {
-    //     title: "YÊU CẦU",
-    //     url: "/requests",
-    //     type: false
-    // },
+
+    {
+        title: "YÊU CẦU SỬA CHỮA",
+        url: "/yeucausuachua",
+        type: true,
+        role: ['admin', 'ktv', 'sale']
+    },
+    {
+        title: "YÊU CẦU LẮP ĐẶT",
+        url: "/yeucaulapdat",
+        type: true,
+        role: ['admin', 'ktv', 'sale']
+    },
     {
         title: "HÓA ĐƠN SỬA CHỮA",
         url: "/hoadonsuachua",

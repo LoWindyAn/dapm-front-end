@@ -12,13 +12,15 @@ const Report = () => {
     const [data, setData] = useState([])
     const pdfRef = useRef();
 
-    useEffect(() => {
-        const fetchDoanhThu = async () => {
-            // const res = await axios.get('http://localhost:3500/report/doanhthu')
-            const res = await axios.get('http://localhost:3500/report/doanhthu1')
+    const fetchDoanhThu = async () => {
+        // const res = await axios.get('http://localhost:3500/report/doanhthu')
+        const res = await axios.get('http://localhost:3500/report/doanhthu1')
 
-            setData(res.data)
-        }
+        setData(res.data)
+    }
+
+    useEffect(() => {
+
         fetchDoanhThu()
     }, [])
 
@@ -61,6 +63,17 @@ const Report = () => {
             setDatetime(handleDate)
         }, 1000)
     }, [datetime])
+
+    const [isLoad, setIsLoad] = useState(true)
+
+    useEffect(() => {
+
+        setTimeout(() => {
+            setIsLoad(!isLoad)
+        }, 7000)
+        fetchDoanhThu()
+    }, [isLoad]);
+
 
 
     return (

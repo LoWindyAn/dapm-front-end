@@ -1,0 +1,159 @@
+.container {
+    /* width: 500px; */
+    /* height: fit-content; */
+    background: white;
+    border-radius: 8px;
+    flex-direction: column;
+    display: flex;
+    /* align-items: center; */
+    padding: 20px;
+    max-height: 600px;
+    overflow-y: scroll;
+}
+
+.title {
+    height: 32px;
+    font-size: 24px;
+    font-family: sans-serif;
+    border-bottom: 1px solid var(--color1);
+    width: 100%;
+}
+
+.title p {
+    font-weight: bold;
+}
+
+.information {
+    display: flex;
+    gap: 40px;
+    padding: 24px;
+    align-items: center;
+    /* flex-direction: column; */
+    justify-content: center;
+}
+
+.information label {
+    margin-right: 8px;
+    display: inline-block;
+    width: 130px;
+    font-weight: 500;
+}
+
+.information input {
+    width: 300px;
+    height: 24px;
+    border-radius: 4px;
+    border-color: rgb(226, 226, 226);
+}
+
+.information select {
+    width: 308px;
+    height: 32px;
+    border-radius: 4px;
+    border-color: rgb(226, 226, 226);
+    border: 1px solid;
+}
+
+.inforKH {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    height: 200px;
+    margin-bottom: 12px;
+}
+
+.inforKH .sdt {
+    position: relative;
+}
+
+.listKH {
+    position: absolute;
+    width: 300px;
+    background: rgb(234, 234, 234);
+    max-height: 80px;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    left: 180px;
+    top: 110px;
+    border-radius: 4px;
+    box-shadow: 2px 2px 8px 2px rgb(177, 177, 177);
+}
+
+.listKH li {
+    height: 20px;
+    align-content: center;
+    padding-left: 8px;
+}
+
+.listKH li:hover {
+    cursor: pointer;
+    background: gray;
+}
+
+.inforHD {
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    justify-content: flex-start;
+}
+
+.linhkienthay {
+    padding-left: 24px;
+}
+
+.linhkienthay .header th,
+.linhkienthay tbody td {
+    width: 200px;
+    border: 1px solid black;
+    height: 28px;
+    text-align: center;
+    align-content: center;
+}
+
+.linhkienthay .header th {
+    background-color: var(--color2);
+    color: white;
+    font-weight: 500;
+}
+
+.linhkienthay table {
+    position: relative;
+}
+
+.btn {
+    border-top: 1px solid #000;
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    padding: 24px;
+}
+
+.btn button {
+    width: 80px;
+    height: 40px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btnAdd {
+    background: white;
+    border-color: var(--color2);
+    color: var(--color2);
+}
+
+.btnAdd:hover {
+    background-color: var(--color2);
+    color: white;
+}
+
+.btnCancel {
+    background: white;
+    border-color: #dbdb00;
+    color: #dbdb00;
+}
+
+.btnCancel:hover {
+    background-color: #dbdb00;
+    color: white;
+}
