@@ -1,0 +1,28 @@
+.filter {
+    display: flex;
+    gap: 24px;
+    margin: 12px;
+    align-items: center;
+}
+
+.filter label {
+    font-weight: 600;
+}
+
+.filter select {
+    width: 120px;
+    height: 32px;
+    border-radius: 4px;
+    text-align: center;
+    align-content: center;
+    font-weight: bold;
+}
+
+.table th,
+.table td {
+    width: 200px;
+    border: 1px solid black;
+    text-align: center;
+    height: 32px;
+    align-content: center;
+}

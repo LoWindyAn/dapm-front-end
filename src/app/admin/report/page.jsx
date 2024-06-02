@@ -7,16 +7,19 @@ import BarChart from '@/component/report/BarChart'
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { FaFileExport } from 'react-icons/fa'
+import BarChartComponent from '@/component/report/BarChartCom'
 
 const Report = () => {
     const [data, setData] = useState([])
+    const [soluongban, setSoluongban] = useState([])
     const pdfRef = useRef();
 
     const fetchDoanhThu = async () => {
         // const res = await axios.get('http://localhost:3500/report/doanhthu')
         const res = await axios.get('http://localhost:3500/report/doanhthu1')
-
         setData(res.data)
+        const res1 = await axios.get('http://localhost:3500/report/linhkienban')
+        setSoluongban(res1.data)
     }
 
     useEffect(() => {
@@ -100,6 +103,14 @@ const Report = () => {
                     </div>
                     <div className={Styles.Chart1}>
                         <BarChart data={data} />
+                    </div>
+                </div>
+                <div className={Styles.SoLuongBan}>
+                    <div>
+                        <h1>Số lượng linh kiện lắp đặt, sửa chữa theo tháng</h1>
+                    </div>
+                    <div className={Styles.Chart2}>
+                        <BarChartComponent data={soluongban} />
                     </div>
                 </div>
             </div>

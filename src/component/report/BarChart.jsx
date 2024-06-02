@@ -1,11 +1,11 @@
 // components/RevenueChart.js
 import { useState } from 'react';
-import { Bar, Pie } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement } from 'chart.js';
+import { Line, Pie } from 'react-chartjs-2';
+import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ArcElement } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-import Styles from './chart.module.css'
+import Styles from './chart.module.css';
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, ArcElement, Title, Tooltip, Legend, ChartDataLabels);
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, ArcElement, Title, Tooltip, Legend, ChartDataLabels);
 
 const RevenueChart = ({ data }) => {
     const [showDataLabels, setShowDataLabels] = useState(true);
@@ -52,19 +52,25 @@ const RevenueChart = ({ data }) => {
                 label: 'Lắp đặt',
                 data: sortedLabels.map(label => lapdatData[label] || 0),
                 borderColor: 'rgb(83, 255, 255)',
-                backgroundColor: 'rgb(83, 255, 255)',
+                backgroundColor: 'rgba(83, 255, 255, 0.5)',
+                fill: false,
+                tension: 0.1
             },
             {
                 label: 'Sửa chữa',
                 data: sortedLabels.map(label => suachuaData[label] || 0),
                 borderColor: 'rgb(255, 83, 83)',
-                backgroundColor: 'rgb(255, 83, 83)',
+                backgroundColor: 'rgba(255, 83, 83, 0.5)',
+                fill: false,
+                tension: 0.1
             },
             {
                 label: 'Tổng doanh thu',
                 data: sortedLabels.map(label => tongthuData[label] || 0),
                 borderColor: 'green',
-                backgroundColor: 'green',
+                backgroundColor: 'rgba(0, 128, 0, 0.5)',
+                fill: false,
+                tension: 0.1
             }
         ],
     };
@@ -158,10 +164,8 @@ const RevenueChart = ({ data }) => {
                 <button onClick={toggleDataLabels}>
                     {showDataLabels ? 'Ẩn số doanh thu' : 'Hiện số doanh thu'}
                 </button>
-                <Bar data={chartData} options={options} />
-
+                <Line data={chartData} options={options} />
             </div>
-
         </div>
     );
 };

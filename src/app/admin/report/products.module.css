@@ -73,3 +73,19 @@
     width: 100%;
     color: rgb(83, 255, 255);
 }
+
+.SoLuongBan {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px;
+    gap: 32px;
+    border: 1px solid black;
+    margin-top: 24px;
+    border-radius: 8px;
+}
+
+.SoLuongBan h1 {
+    font-weight: 500;
+    font-size: 24px;
+}
