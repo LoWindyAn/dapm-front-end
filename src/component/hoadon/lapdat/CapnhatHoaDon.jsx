@@ -10,7 +10,15 @@ const TaoHoaDon = (props) => {
     const [dslinhkien, setDsLinhkien] = useState([])
     const [lkien, setLkien] = useState([])
     const [user, setUser] = useState({})
+    const [nv, setNv] = useState()
 
+    useEffect(() => {
+        const a = async () => {
+            const b = await axios.get(`http://localhost:3500/yeucau/suachua/dsnhanvien?MaHD=${ahoadon.MaHD}`)
+            setNv(b.data[0])
+        }
+        a()
+    }, [ahoadon])
 
     useEffect(() => {
         const fetchDsLinhkien = async () => {
@@ -221,6 +229,8 @@ const TaoHoaDon = (props) => {
 
                             </div>)}
                     </table>
+                    <p style={{ marginTop: '12px', marginBottom: '12px', color: 'blue' }}>Kỹ thuật viên: {nv && nv.HoVaTen && nv.HoVaTen} - {nv && nv.MaNV && nv.MaNV}</p>
+
                 </div>
             </div>
             <div className={Styles.btn}>
